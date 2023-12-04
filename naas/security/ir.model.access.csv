@@ -1,0 +1,5 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_naas_experiment,naas.experiment,model_naas_experiment,naas.naas_users,1,1,1,1
+access_naas_experiment_task,naas.experiment.task,model_naas_experiment_task,naas.naas_users,1,1,1,1
+access_naas_prospect,naas.prospect,model_naas_prospect,naas.naas_users,1,1,1,1
+access_naas_subject,naas.subject,model_naas_subject,naas.naas_users,1,1,1,1

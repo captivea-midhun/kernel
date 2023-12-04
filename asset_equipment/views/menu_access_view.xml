@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="maintenance.menu_m_request" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="maintenance.menu_maintenance_title" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="mrp_maintenance.menu_equipment_dashboard" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="maintenance.menu_equipment_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="maintenance.menu_m_request_calendar" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="maintenance.menu_m_request_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="maintenance.menu_m_request" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="maintenance.menu_m_reports">
+        <field name="groups_id" eval="[(6,0,[ref('maintenance.group_equipment_manager')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="maintenance.maintenance_reporting">
+        <field name="groups_id" eval="[(6,0,[ref('maintenance.group_equipment_manager')])]"/>
+    </record>
+</odoo>

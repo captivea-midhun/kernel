@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Product Product Category Update access group -->
+    <record model="res.groups" id="update_product_category">
+        <field name="name">Category Update</field>
+    </record>
+</odoo>

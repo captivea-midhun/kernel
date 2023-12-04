@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fixed_asset_paper_format" model="report.paperformat">
+        <field name="name">Fixed Asset</field>
+        <field name="orientation">Landscape</field>
+        <field name="header_spacing">35</field>
+    </record>
+
+    <report id="fixed_asset_report"
+            string="Fixed Asset"
+            model="account.asset"
+            report_type="qweb-pdf"
+            name="account_asset_extension.fixed_asset_template"
+            file="account_asset_extension.fixed_asset_template"
+            paperformat="account_asset_extension.fixed_asset_paper_format"
+            menu="False"/>
+
+    <report id="cip_asset_report"
+            string="CIP Asset"
+            model="account.move.line"
+            report_type="qweb-pdf"
+            name="account_asset_extension.cip_asset_template"
+            file="account_asset_extension.cip_asset_template"
+            paperformat="account_asset_extension.fixed_asset_paper_format"
+            menu="False"/>
+</odoo>

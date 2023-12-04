@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Manufacturing Order Top Menu -->
+    <menuitem name="Manufacturing Orders"
+              id="mrp.menu_mrp_production_action"
+              parent="mrp.menu_mrp_root"
+              action="mrp.mrp_production_action"
+              sequence="1"/>
+
+    <!-- Bill of Materials Top Menu -->
+    <menuitem name="Bill of Materials"
+              id="mrp.menu_mrp_bom_form_action"
+              parent="mrp.menu_mrp_root"
+              action="mrp.mrp_bom_form_action"
+              sequence="2"/>
+
+    <!-- Product Top Menu -->
+    <menuitem name="Products"
+              id="mrp.menu_mrp_product_form"
+              parent="mrp.menu_mrp_root"
+              action="mrp.product_template_action"
+              sequence="3"
+              groups="product_extension.group_product_template"/>
+
+    <!-- Operations Top Menu -->
+    <menuitem name="Products"
+              id="mrp.menu_mrp_product_form"
+              parent="mrp.menu_mrp_root"
+              action="mrp.product_template_action"
+              sequence="3"/>
+
+    <!-- Master Data Top Menu-->
+    <menuitem id="mrp.menu_mrp_bom"
+              name="Master Data"
+              parent="mrp.menu_mrp_root"
+              sequence="4"/>
+
+    <!-- Planning Top Menu -->
+    <menuitem id="mrp.mrp_planning_menu_root"
+              name="Planning"
+              parent="mrp.menu_mrp_root"
+              sequence="5"/>
+
+    <!-- Reporting Top Menu -->
+    <menuitem id="mrp.menu_mrp_reporting"
+              name="Reporting"
+              parent="mrp.menu_mrp_root"
+              sequence="6"/>
+
+    <!-- Overview Top Menu -->
+    <menuitem id="mrp.menu_mrp_dashboard"
+              name="Overview"
+              action="mrp.mrp_workcenter_kanban_action"
+              groups="mrp.group_mrp_routings"
+              parent="mrp.menu_mrp_root"
+              sequence="7"/>
+
+    <!-- Operations Top Menu -->
+    <menuitem id="mrp.menu_mrp_manufacturing"
+              name="Operations"
+              parent="mrp.menu_mrp_root"
+              sequence="4"/>
+
+    <menuitem id="mrp.menu_mrp_unbuild"
+              name="Unbuild Orders"
+              parent="mrp.menu_mrp_manufacturing"
+              action="mrp.mrp_unbuild"
+              sequence="2"/>
+
+    <menuitem id="mrp.menu_mrp_workorder_todo"
+              name="Work Orders"
+              action="mrp.mrp_workorder_todo"
+              parent="mrp.menu_mrp_manufacturing"
+              groups="mrp.group_mrp_routings"
+              sequence="3"/>
+
+</odoo>

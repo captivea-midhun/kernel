@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_inventory_line_tree2_kernel" model="ir.ui.view">
+        <field name="name">stock.inventory.line.tree.inherit</field>
+        <field name="model">stock.inventory.line</field>
+        <field name="inherit_id" ref="stock.stock_inventory_line_tree2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-muted"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_inventory_tree_kernel" model="ir.ui.view">
+        <field name="name">stock.inventory.tree.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_tree"/>
+        <field name="arch" type="xml">
+            <field name="date" position="before">
+                <field name="description" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_stock_inventory_form_kernel" model="ir.ui.view">
+        <field name="name">stock.inventory.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_form"/>
+        <field name="arch" type="xml">
+            <field name="accounting_date" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+            <xpath expr="//group[2]" position="after">
+                <group string="Internal Notes">
+                    <field name="description" nolabel="1"
+                           placeholder="This note is only for internal purposes." required="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem action="stock.stock_product_normal_action"
+              id="menu_product_variant_config_stock_kernel"
+              parent="stock.menu_stock_root" sequence="0"
+              name="Products"/>
+    <menuitem action="stock.stock_picking_type_action"
+              id="stock.stock_picking_type_menu"
+              parent="stock.menu_stock_root" sequence="1"
+              name="Overview"/>
+
+    <!-- Add product template group in menuitem -->
+    <menuitem id="stock.menu_product_variant_config_stock"
+              name="Products"
+              action="stock.product_template_action_product"
+              parent="stock.menu_stock_inventory_control"
+              sequence="1"
+              groups="product_extension.group_product_template"/>
+
+</odoo>

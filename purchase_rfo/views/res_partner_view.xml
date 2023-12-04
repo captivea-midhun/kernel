@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale & Purhcase Tab (Add Field Inside Purchase Group)-->
+    <record id="view_vendor_registration_form" model="ir.ui.view">
+        <field name="name">res.partner.vendor.registration.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="nda"/>
+                <field name="nda_note" attrs="{'invisible':[('nda','=',False)]}"/>
+                <field name="export_restriction"/>
+                <field name="export_restriction_note"
+                       attrs="{'invisible':[('export_restriction','=',False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="before">
+                <field name="type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Record search or filter by NDA and Export Restriction -->
+    <record id="view_vendor_registration_filter" model="ir.ui.view">
+        <field name="name">res.partner.vendor.registration.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="nda_note"/>
+                <field name="export_restriction_note"/>
+            </field>
+            <filter name="type_company" position="after">
+                <filter name="nda" string="NDA" domain="[('nda', '=', True)]"/>
+                <filter name="export_restriction" string="Export Control"
+                        domain="[('export_restriction', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

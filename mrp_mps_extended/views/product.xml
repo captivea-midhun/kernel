@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="product_product_mps_form_inherit" model="ir.ui.view">-->
+<!--            <field name="name">product.product.mps.form.inherit</field>-->
+<!--            <field name="model">product.product</field>-->
+<!--            <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="type" position="before">-->
+<!--                    <field name="use_in_mps"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+         <record id="product_template_mps_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.mps.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="before">
+                    <field name="use_in_mps"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_categ_emoji_form_inherit" model="ir.ui.view">
+            <field name="name">product.categ.emoji.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="category_emoji_id"/>
+                </field>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

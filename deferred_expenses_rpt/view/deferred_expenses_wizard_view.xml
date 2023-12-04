@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="deferred_expenses_report_view" model="ir.ui.view">
+            <field name="name">Deferred Expenses Report</field>
+            <field name="model">deferred.expenses.report</field>
+            <field name="arch" type="xml">
+                <form string="Deferred Expenses Report">
+                    <group>
+                        <group>
+                            <field name="date_from" required="1"/>
+                        </group>
+                        <group>
+                            <field name="date_to" required="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Download PDF Report"
+                                type="object"
+                                name="print_deferred_expenses_pdf_report"
+                                class="oe_highlight"/>
+                        <button string="Download XLS Report"
+                                type="object"
+                                name="print_deferred_expenses_xls_report"
+                                class="oe_highlight"/>
+                        <button string="_Cancel"
+                                class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="deferred_expenses_report_action" model="ir.actions.act_window">
+            <field name="name">Deferred Expenses Report</field>
+            <field name="res_model">deferred.expenses.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="deferred_expenses_report_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="deferred_expenses_report_menu"
+                  parent="account.account_reports_management_menu"
+                  action="deferred_expenses_report_action" sequence="99"
+                  groups="account.group_account_user"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_equipment_user" model="res.groups">
+        <field name="name">Equipment User</field>
+        <field name="category_id"
+               ref="base.module_category_operations_maintenance"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">The user will be able to manage equipments.</field>
+    </record>
+
+    <record id="maintenance.group_equipment_manager" model="res.groups">
+        <field name="implied_ids"
+               eval="[(4, ref('asset_equipment.group_equipment_user'))]"/>
+    </record>
+
+    <record id="ir_rule_maintenance_equipment_user" model="ir.rule">
+        <field name="name">Equipment User</field>
+        <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+        <field name="groups" eval="[(4, ref('asset_equipment.group_equipment_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+</odoo>

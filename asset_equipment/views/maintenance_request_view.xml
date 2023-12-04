@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_equipment_request_view_search_inherit_kernel" model="ir.ui.view">
+        <field name="name">equipment.request.search</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/filter[@name='category']" position="after">
+                <filter string='Equipment' name="equipment" domain="[]"
+                        context="{'group_by' : 'equipment_id'}"/>
+            </xpath>
+            <xpath expr="//group/filter[@name='assigned']" position="attributes">
+                <attribute name="string">Assigned To</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="maintenance.hr_equipment_request_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,kanban,pivot,graph,calendar</field>
+        <field name="view_id" ref="maintenance.hr_equipment_request_view_tree"/>
+        <field name="context">{'default_user_id': uid,'search_default_equipment':1}</field>
+    </record>
+
+    <record id="hr_equipment_request_view_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">equipment.request.form</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/group[2]/label" position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/div" position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/field[@name='schedule_date']" position="after">
+                <field name="next_action_date" invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="cost" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="maintenance_request_view_form_inherit_mrp_inherit_kernel" model="ir.ui.view">
+        <field name="name">equipment.request.form</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="mrp_maintenance.maintenance_request_view_form_inherit_mrp"/>
+        <field name="arch" type="xml">
+            <field name="production_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="workorder_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_equipment_view_calendar_kernel_inherit"
+            model="ir.ui.view">
+        <field name="name">equipment.request.calendar</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_calendar"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="next_action_date"/>
+            </field>
+        </field>
+    </record>
+</odoo>

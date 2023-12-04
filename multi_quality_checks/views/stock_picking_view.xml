@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_validate'][hasclass('o_btn_validate')]"
+                   position="before">
+                <field name="check_ids" invisible="1"/>
+                <button string="Quality Check"
+                        name="%(multi_quality_checks.wizard_multi_quality_checks_view_action)d"
+                        type="action" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('quality_check_todo', '=', False),
+                    ('state', 'in', ('done', 'cancel'))]}" groups="quality.group_quality_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_view_form_inherit_quality_kernel" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="quality_control.stock_picking_view_form_inherit_quality"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_quality']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_quality_alert'][hasclass('oe_highlight')]"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_quality_alert'][2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

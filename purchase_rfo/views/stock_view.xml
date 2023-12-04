@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_picking_inherited" model="ir.ui.view">
+        <field name="name">stock.picking.kernel.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="confirm">To cancel this transfer you need to cancel the related
+                    purchase order.
+                    Continue?
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cip_asset_template_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="text-center">
+                    <b>CIP Asset Report</b>
+                    <b>
+                        <span t-esc="str(start_date) + ' TO ' + str(end_date)"/>
+                    </b>
+                </div>
+                <br/>
+            </div>
+            <table class="table table-condensed" style="font-size: 12px;">
+                <thead>
+                    <tr>
+                        <th>CIP Account</th>
+                        <th>Date</th>
+                        <th>CIP Account</th>
+                        <th>Analytic Tag</th>
+                        <th class="text-right">Dep. Years</th>
+                        <th class="text-right">Beg Cost</th>
+                        <th class="text-right">Purchase</th>
+                        <th class="text-right">Disposed</th>
+                        <th class="text-right">End Cost</th>
+                        <th class="text-right">Beg Acc Dep</th>
+                        <th class="text-right">Depreciation</th>
+                        <th class="text-right">Disposal</th>
+                        <th class="text-right">End Acc Dep</th>
+                        <th class="text-right">Net</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="move_lines" t-value="[]"/>
+                    <t t-set="total_beginning_value" t-value="0.00"/>
+                    <t t-set="total_current_value" t-value="0.00"/>
+                    <t t-set="total_disposed" t-value="0.00"/>
+                    <t t-set="total_end_cost" t-value="0.00"/>
+                    <t t-set="total_beg_acc_dep" t-value="0.00"/>
+                    <t t-set="total_depreciation" t-value="0.00"/>
+                    <t t-set="total_disposal" t-value="0.00"/>
+                    <t t-set="total_end_acc_dep" t-value="0.00"/>
+                    <t t-set="total_net_value" t-value="0.00"/>
+                    <t t-foreach="cip_account_ids" t-as="cip_account_id">
+                        <t t-set="account_beginning_value" t-value="0.00"/>
+                        <t t-set="account_current_value" t-value="0.00"/>
+                        <t t-set="account_disposed" t-value="0.00"/>
+                        <t t-set="account_end_cost" t-value="0.00"/>
+                        <t t-set="account_beg_acc_dep" t-value="0.00"/>
+                        <t t-set="account_depreciation" t-value="0.00"/>
+                        <t t-set="account_disposal" t-value="0.00"/>
+                        <t t-set="account_end_acc_dep" t-value="0.00"/>
+                        <t t-set="account_net_value" t-value="0.00"/>
+                        <t t-set="move_lines"
+                           t-value="cip_account_id.get_move_line_data(start_date, end_date)"/>
+                        <t t-if="move_lines">
+                            <tr>
+                                <td>
+                                    <b>
+                                        <span t-esc="cip_account_id.display_name"/>
+                                    </b>
+                                </td>
+                                <td colspan="13"/>
+                            </tr>
+                            <t t-foreach="move_lines" t-as="res">
+                                <tr>
+                                    <td colspan="2" class="text-right">
+                                        <span t-esc="res['date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="res['cip_account']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="res['analytic_tag']"/>
+                                    </td>
+                                    <td class="text-right"/>
+                                    <td class="text-right">
+                                        <span t-esc="res['beginning_value']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                        <t t-set="account_beginning_value"
+                                           t-value="account_beginning_value + res['beginning_value']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="res['current_value']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                        <t t-set="account_current_value"
+                                           t-value="account_current_value + res['current_value']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="res['disposed']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                        <t t-set="account_disposed"
+                                           t-value="account_disposed + res['disposed']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="res['end_cost']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                        <t t-set="account_end_cost"
+                                           t-value="account_end_cost + res['end_cost']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="0.00"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="0.00"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="0.00"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="0.00"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="res['net_value']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="5" class="text-right">
+                                    <b>
+                                        Total of
+                                        <t t-esc="cip_account_id.name"/>
+                                    </b>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_beginning_value"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_beginning_value"
+                                       t-value="total_beginning_value + account_beginning_value"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_current_value"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_current_value"
+                                       t-value="total_current_value + account_current_value"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_disposed"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_disposed"
+                                       t-value="total_disposed + account_disposed"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_end_cost"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_end_cost"
+                                       t-value="total_end_cost + account_end_cost"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_beg_acc_dep"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_depreciation"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_disposal"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_end_acc_dep"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="account_net_value"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": cip_account_id.env.user.company_id.currency_id}'/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            <b>Grand Total</b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_beginning_value"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_current_value"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_disposed"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_end_cost"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_beg_acc_dep"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_depreciation"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_disposal"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_end_acc_dep"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                        <td class="text-right">
+                            <b>
+                                <span t-esc="total_net_value"
+                                      t-options='{"widget": "monetary", "display_currency": currency_id}'/>
+                            </b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+    <template id="cip_asset_template">
+        <t t-call="web.html_container">
+            <t t-call="account_asset_extension.cip_asset_template_document"/>
+        </t>
+    </template>
+</odoo>

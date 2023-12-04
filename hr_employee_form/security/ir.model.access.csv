@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_user_salary,access_hr_user_salary,hr_employee_form.model_hr_salary,hr.group_hr_user,1,1,1,0
+access_hr_manager_salary,access_hr_manager_salary,hr_employee_form.model_hr_salary,hr.group_hr_manager,1,1,1,1
+access_hr_user_options,access_hr_user_options,hr_employee_form.model_hr_options,hr.group_hr_user,1,1,1,0
+access_hr_manager_options,access_hr_manager_options,hr_employee_form.model_hr_options,hr.group_hr_manager,1,1,1,1
+access_hr_user_work_authorization,access_hr_user_work_authorization,hr_employee_form.model_hr_work_authorization,hr.group_hr_user,1,1,1,0
+access_hr_manager_work_authorization,access_hr_manager_work_authorization,hr_employee_form.model_hr_work_authorization,hr.group_hr_manager,1,1,1,1
+access_hr_user_hr_relocation,access_hr_user_hr_relocation,hr_employee_form.model_hr_relocation,hr.group_hr_user,1,1,1,1
+access_hr_manager_hr_relocation,access_hr_manager_hr_relocation,hr_employee_form.model_hr_relocation,hr.group_hr_manager,1,1,1,1

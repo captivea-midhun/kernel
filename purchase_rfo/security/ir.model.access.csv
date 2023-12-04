@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+purchase.access_product_product_purchase_user,product.product.purchase.user,product.model_product_product,purchase.group_purchase_user,1,1,1,0
+purchase.access_product_template_purchase_user,product.templatepurchase_user,product.model_product_template,purchase.group_purchase_user,1,1,1,0
+access_purchase_delivery_courier_user,access_purchase_delivery_courier_user,purchase_rfo.model_purchase_delivery_courier,base.group_user,1,0,0,0
+access_purchase_delivery_courier_manager,access_purchase_delivery_courier_manager,purchase_rfo.model_purchase_delivery_courier,purchase.group_purchase_manager,1,1,1,1
+access_purchase_manager_res_partner_bank,access_purchase_manager_res_partner_bank,base.model_res_partner_bank,purchase.group_purchase_manager,1,1,1,0
+access_purchase_manager_account_move_line,access_purchase_manager_account_move_line,account.model_account_move_line,purchase.group_purchase_manager,1,1,1,0
+access_purpose_type,purpose.type,model_purpose_type,purchase.group_purchase_user,1,1,1,1
+access_vendor_creation,access.vendor.creation,base.model_res_partner,purchase_rfo.group_vendor_creation,1,1,1,0
+access_purpose_type_user,access.purpose.type.user,model_purpose_type,group_purpose_type_user,1,1,1,0
+access_purpose_type_admin,access.purpose.type.manager,model_purpose_type,group_purpose_type_admin,1,1,1,1
+access_purpose_type_purchase_user,access.purpose.type.purchase.user,model_purpose_type,purchase.group_purchase_user,1,0,0,0
+access_vendor_deletion,access.vendor.deletion,base.model_res_partner,purchase_rfo.group_vendor_deletion,1,1,1,1

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MRP View inherited -->
+    <record id="mrp_production_view_inherit_import" model="ir.ui.view">
+        <field name="name">mrp.production.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="%(kernel_mrp_serial_import.action_serial_import_wizard)d"
+                        string="Import Serial" class="oe_highlight" type="action"
+                        attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_assign']" position="replace">
+                <button name="action_assign" attrs="{'invisible': ['|', '|', '|', ('is_locked', '=', False), ('state', 'in', ('draft', 'done', 'cancel')), ('reservation_state', '=', 'assigned'), ('is_import_serial' ,'=', True)]}" string="RESERVE &amp; KIT" type="object" class="oe_highlight"/>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[3]/group/group" position="after">
+                <group>
+                    <field name="is_import_serial"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

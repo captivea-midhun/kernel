@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inventory_validate_assets_backend" name="Inventory Validate Assets"
+              inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript"
+                    src="/inventory_adjustment_extended/static/src/js/inventory_validate_button_controller.js"/>
+        </xpath>
+    </template>
+</odoo>

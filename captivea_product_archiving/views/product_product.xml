@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_product_normal_form_view_inherit_for_product_archiving" model="ir.ui.view">
+        <field name="name">product.product.normal.form.view.inherit.for.product.archiving</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="archive_check"
+                        type="object"
+                        string="Archive Check"
+                        class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//notebook[last()]" position="before">
+                <group col="8">
+                    <field name="to_be_archived"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

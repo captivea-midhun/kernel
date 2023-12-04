@@ -1,0 +1,2 @@
+Products,SKU,QTY,Location,Serial No,Qc Status,Comments
+Product 4,PRD4,1,HQ/Stock,,pass,Quality check is pass and move to the stock location

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_mps_search_view_extended" model="ir.ui.view">
+        <field name="name">mrp.production.schedule.search.view.extended</field>
+        <field name="model">mrp.production.schedule</field>
+        <field name="inherit_id" ref="mrp_mps.mrp_mps_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field string="Can Be Purchased?" name="purchase_ok"/>
+<!--                <filter string="Can be purchased" name="purchase_ok_true" domain="[('purchase_ok','=', True)]"/>-->
+<!--                <filter string="Can not be purchased" name="purchase_ok_false" domain="[('purchase_ok','=', False)]"/>-->
+                <field name="categ_id"/>
+                <field name="product_type"/>
+                <field name="tag_ids" string="Product Line"/>
+                <field name="product_to_replenish"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="mrp_mps.action_mrp_mps" model="ir.actions.client">
+        <field name="context">{'from_search_view':True}</field>
+        <field name="tag">setu_mrp_mps_client_action</field>
+    </record>
+
+</odoo>

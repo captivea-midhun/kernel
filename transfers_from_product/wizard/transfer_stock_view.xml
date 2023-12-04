@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <act_window name="Create Transfer" id="action_transfer_stock_picking"
+                res_model="transfer.stock.picking"
+                view_mode="form" target="new"/>
+
+    <record id="view_transfer_confirmation" model="ir.ui.view">
+        <field name="name">Confirmation</field>
+        <field name="model">confirm.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="confirmation" readonly="1"/>
+                <footer>
+                    <button name="confirm_transfer" string="OK" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_transfer_stock_picking" model="ir.ui.view">
+        <field name="name">Make Transfers</field>
+        <field name="model">transfer.stock.picking</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="picking_type_id" required="1" style="width: 40%" force_save="1"/>
+                    <field name="product_visible" force_save="1" invisible="1"/>
+                </group>
+                <field name="product_trasfer_moves" nolabel="1">
+                    <tree editable="bottom">
+                        <field name="product_id" create="0" required="1" force_save="1"
+                               options="{'no_create_edit': True}"
+                               attrs="{'column_invisible': [('parent.product_visible','=', False)]}"/>
+                        <field name="location_id" create="0" required="1" force_save="1"
+                               options="{'no_create_edit': True}"/>
+                        <field name="location_dest_id" create="0" required="1" force_save="1"/>
+                        <field name="lots_visible" invisible="1" force_save="1"/>
+                        <field name="lot_id" create="0" string="Lot/Serial Number" force_save="1"
+                               attrs="{'invisible': [('lots_visible','=', False)],
+                               'required':[('lots_visible','=', True)]}"/>
+                        <field name="reserved_qty" force_save="1" readonly="1"/>
+                        <field name="done_qty" force_save="1"/>
+                    </tree>
+                </field>
+                <field name="stock_quant_lines" nolabel='1'>
+                    <tree create="0" edit="0" delete="0">
+                        <field name="create_date" style="pointer-events:none;"/>
+                        <field name="product_id"
+                               attrs="{'column_invisible': [('parent.product_visible','=', False)]}"
+                               style="pointer-events:none;"/>
+                        <field name="location_id" style="pointer-events:none;"/>
+                        <field name="lot_id" string="Lot/Serial Number"
+                               style="pointer-events:none;"/>
+                        <field name="inventory_quantity" style="pointer-events:none;"/>
+                        <field name="reserved_quantity" style="pointer-events:none;"/>
+                        <field name="value" widget="monetary" style="pointer-events:none;"/>
+                        <field name="currency_id" invisible="1"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button name="create_transfer" string="Create Transfer" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

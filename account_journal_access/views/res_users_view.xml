@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_users_form_inherit_kernel">
+        <field name="name">view.users.form.inherit.kernel</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='access_rights']/group"
+                   position="after">
+                <group name="Journals">
+                    <field name="journal_ids" widget="many2many_tags"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account.menu_board_journal_1" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(4,ref('account_journal_access.group_reconcile_kernel'))]"/>
+    </record>
+
+</odoo>

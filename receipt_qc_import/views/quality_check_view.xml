@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Import Quality Control Button in picking -->
+    <record id="view_picking_form_kernal_inherit" model="ir.ui.view">
+        <field name="name">kernal.product.category.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="%(receipt_qc_import.action_import_quality_control)d"
+                        string="Import QC" type="action"
+                        class="btn-primary"
+                        attrs="{'invisible': ['|', ('quality_check_todo', '=', False),
+                        ('state', 'in', ('done', 'cancel'))]}"
+                        groups="quality.group_quality_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

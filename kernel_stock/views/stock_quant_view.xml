@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inhertied Stock Quant Tree view ,added default_order create_date desc-->
+    <record id="view_stock_quant_tree_editable_tree_inherit_added_date_desc_order"
+            model="ir.ui.view">
+        <field name="name">view.stock.quant.inherit.added_date_desc_default_order</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">create_date desc</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

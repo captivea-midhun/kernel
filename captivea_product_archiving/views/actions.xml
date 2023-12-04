@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+            <field name="context">{'quotation_only': True,'from_front':True}</field>
+        </record>
+        <record id="mrp.mrp_production_action" model="ir.actions.act_window">
+            <field name="context">{'search_default_todo': True, 'default_company_id': allowed_company_ids[0],'from_front':True}</field>
+        </record>
+
+    </data>
+</odoo>

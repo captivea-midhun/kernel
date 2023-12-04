@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Import Quality Control Wizard View-->
+    <record id="import_qc_wizard_view" model="ir.ui.view">
+        <field name="name">Import Quality Control</field>
+        <field name="model">wizard.import.quality.check</field>
+        <field name="arch" type="xml">
+            <form string="Import Quality Control">
+                <group>
+                    <field name="file_type" widget="radio"/>
+                    <field name="filename" invisible="1" readonly="1" force_save="1"/>
+                    <field name="file" filename="filename"/>
+                </group>
+                <footer>
+                    <button string="Proceed" name="action_import_qc" class="oe_highlight"
+                            type="object"/>
+                    OR
+                    <button name="cancel" string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Import quality Control Action -->
+    <record id="action_import_quality_control" model="ir.actions.act_window">
+        <field name="name">Import Quality Control</field>
+        <field name="res_model">wizard.import.quality.check</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- Imported Quality Check View -->
+    <record id="imported_qc_wizard_view" model="ir.ui.view">
+        <field name="name">imported.qc.wizard.view</field>
+        <field name="model">imported.qc</field>
+        <field name="arch" type="xml">
+            <form string="Imported Quality Check">
+                <field name="is_imported" invisible='True'/>
+                <div attrs="{'invisible': [('is_imported' ,'=', False)]}">
+                    <span>Records are imported successfully.</span>
+                    <field name="imported_products" readonly="True"/>
+                </div>
+                <div attrs="{'invisible': [('is_imported' ,'=', True)]}">
+                    <span>No matching record found for Quality Check.</span>
+                </div>
+                <footer>
+                    <button string="OK" special="save" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

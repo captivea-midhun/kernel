@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_serial_import_form" model="ir.ui.view">
+        <field name="name">mrp.serial.import</field>
+        <field name="model">mrp.serial.import</field>
+        <field name="arch" type="xml">
+            <form string="Serial Import Report">
+                <group>
+                    <field name="product_file"/>
+                    <field name="product_filename" invisible="1" readonly="1" force_save="1"/>
+                </group>
+                <footer>
+                    <button name="action_import" string="Proceed" class="oe_highlight"
+                            type="object"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_serial_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import Serial</field>
+        <field name="res_model">mrp.serial.import</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_serial_import_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

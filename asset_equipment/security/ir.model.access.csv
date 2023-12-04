@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+maintenance.access_equipment_user,equipment.user,maintenance.model_maintenance_equipment,asset_equipment.group_equipment_user,1,0,0,0
+access_purchase_order_equipment_user,purchase.order.equipment.user,purchase.model_purchase_order,asset_equipment.group_equipment_user,1,0,0,0
+access_purchase_order_line_equipment_user,purchase.order.line.equipment.user,purchase.model_purchase_order_line,asset_equipment.group_equipment_user,1,0,0,0
+access_account_asset_equipment_user,account.asset.equipment.user,account_asset.model_account_asset,asset_equipment.group_equipment_user,1,0,0,0
+access_account_move_equipment_user,account.move.equipment.user,account.model_account_move,asset_equipment.group_equipment_user,1,0,0,0
+access_account_move_line_equipment_user,account.move.line.equipment.user,account.model_account_move_line,asset_equipment.group_equipment_user,1,0,0,0
+access_stock_move_equipment_user,stock.move.equipment.user,stock.model_stock_move,asset_equipment.group_equipment_user,1,0,0,0
+access_stock_picking_equipment_user,stock.picking.equipment.user,stock.model_stock_picking,asset_equipment.group_equipment_user,1,0,0,0
+access_mrp_workcenter_equipment_user,mrp.workcenter.equipment.user,mrp.model_mrp_workcenter,asset_equipment.group_equipment_user,1,0,0,0
+access_hr_department_base_user,hr.department.base.user,hr.model_hr_department,base.group_user,1,0,0,0
+access_hr_employee_base_user,hr.employee.base.user,hr.model_hr_employee,base.group_user,1,0,0,0

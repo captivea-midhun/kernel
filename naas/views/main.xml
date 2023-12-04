@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_naas" name="NaaS" sequence="10" />
+
+    <!-- Prospect -->
+    <record model="ir.actions.act_window" id="action_naas_prospects">
+        <field name="name">Prospects</field>
+        <field name="res_model">naas.prospect</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem parent="menu_naas" id="menu_naas_prospects" name="Prospects" action="action_naas_prospects" />
+    <record model="ir.ui.view" id="tree_naas_prospects">
+        <field name="name">Prospects</field>
+        <field name="model">naas.prospect</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="internal_screening_id" />
+                <field name="submitted_date" />
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="email" widget="email" />
+                <field name="phone" widget="phone" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_naas_prospects">
+        <field name="name">Prospect</field>
+        <field name="model">naas.prospect</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="internal_screening_id" />
+                            <field name="submitted_date" />
+
+                            <field name="first_name" />
+                            <field name="last_name" />
+                            <field name="email" widget="email" />
+                            <field name="phone" widget="phone" />
+                        </group>
+                        <group>
+                            <field name="zip_code" />
+                            <field name="birth_month" />
+                            <field name="birth_year" />
+                            <field name="gender" />
+                            <field name="can_contact" />
+                        </group>
+                    </group>
+                    <group>
+                        <group colspan="2">
+                            <field name="subject_ids" context="{'default_prospect_id': id}" />
+                        </group>
+                    </group>
+                    <group>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Subject -->
+    <record model="ir.actions.act_window" id="action_naas_subjects">
+        <field name="name">Subjects</field>
+        <field name="res_model">naas.subject</field>
+        <field name="views">tree,form</field>
+    </record>
+    <menuitem parent="menu_naas" id="menu_naas_subjects" name="Subjects" action="action_naas_subjects" />
+    <record model="ir.ui.view" id="tree_naas_subjects">
+        <field name="name">Subjects</field>
+        <field name="model">naas.subject</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="experiment_name" />
+                <field name="prospect_name" />
+                <field name="internal_subject_id" />
+                <field name="status" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_naas_subjects">
+        <field name="name">Subject</field>
+        <field name="model">naas.subject</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="is_created" invisible="1" />
+                        <field name="experiment_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'readonly': [('is_created','=',True)], 'invisible':[('is_created', '=', True)]}" />
+                        <field name="experiment_name" attrs="{'invisible':[('is_created', '!=', True)]}" />
+                        <field name="prospect_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'readonly': [('is_created','=',True)]}" />
+                    </group>
+                    <group>
+                        <field name="internal_subject_id" />
+                        <field name="status" />
+                    </group>
+                </group>
+                <group colspan="2" string="Tasks" name="experiment_tasks" >
+                    <field name="task_ids" nolabel="1" />
+                </group>
+                <group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </group>
+                <group>
+                    <button string="Add Missing Tasks" type="object" name="add_missing_tasks" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Experiment Task -->
+    <record model="ir.ui.view" id="calendar_naas_experiment_tasks">
+        <field name="name">Tasks</field>
+        <field name="model">naas.experiment.task</field>
+        <field name="arch" type="xml">
+            <calendar date_start="scheduled_from" date_stop="scheduled_to">
+                <field name="computed_name" />
+                <field name="subject_name" />
+            </calendar>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_naas_experiment_tasks">
+        <field name="name">Tasks</field>
+        <field name="res_model">naas.experiment.task</field>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="calendar_naas_experiment_tasks"/>
+    </record>
+    <menuitem parent="menu_naas" id="menu_naas_task_calendar" name="Calendar" action="action_naas_experiment_tasks" />
+    <record model="ir.ui.view" id="tree_naas_experiment_tasks">
+        <field name="name">Tasks</field>
+        <field name="model">naas.experiment.task</field>
+        <field name="arch" type="xml">
+            <tree editable="top" edit="true" create="false" delete="false" duplicate="false" import="false" limit="100">
+                <field name="computed_name" />
+                <field name="scheduled_from" string="Scheduled" class="oe_read_only" />
+                <field name="completed" />
+                <field name="completed_date" string="Date" />
+                <field name="task_type" invisible="1" />
+                <field name="data_session_id" attrs="{'readonly':[('task_type', '!=', 'data')]}" />
+                <field name="notes" width="300px" />
+                <button name="edit" string="Edit" type="object" class="oe_read_only" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="form_naas_experiment_tasks">
+        <field name="name">Task</field>
+        <field name="model">naas.experiment.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="subject_id" readonly="1" />
+                            <field name="group" readonly="1" />
+                            <field name="name" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="completed" />
+                            <field name="completed_date" />
+
+                            <!-- task type -->
+                            <field name="task_type" invisible="1" />
+                            <field name="scheduled_from" widget="daterange" options='{"related_end_date": "scheduled_to", "picker_options": { "maxSpan": { "days": 1 } }}' attrs="{'invisible':[('task_type', '!=', 'event')]}" />
+                            <field name="scheduled_to" widget="daterange" options='{"related_start_date": "scheduled_from", "picker_options": { "maxSpan": { "days": 1 } }}' attrs="{'invisible':[('task_type', '!=', 'event')]}" />
+                            <field name="data_session_id" attrs="{'invisible':[('task_type', '!=', 'data')]}" />
+                            <field name="payment_method" attrs="{'invisible':[('task_type', '!=', 'payment')]}" />
+                            <field name="payment_amount" attrs="{'invisible':[('task_type', '!=', 'payment')]}" />
+                            <field name="transaction_code" attrs="{'invisible':[('task_type', '!=', 'payment')]}" />
+                            <field name="attachment" attrs="{'invisible':[('task_type', 'not in', ['attachment', 'payment'])]}" />
+                        </group>
+                    </group>
+                    <group colspan="2">
+                        <field name="notes" />
+                    </group>
+                    <group>
+                        <div class="oe_chatter" style="display: block;">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

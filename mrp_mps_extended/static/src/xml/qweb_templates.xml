@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+        <t t-extend="mrp_mps_production_schedule">
+
+        <t t-jquery="th[t-foreach='manufacturingPeriods']" t-operation="replace">
+            <th class="text-right" scope="col" t-foreach="manufacturingPeriods" t-as="period">
+                <t t-set="week_date_list" t-value="period.split(',')"/>
+                <t t-set="week" t-value="week_date_list[0]"/>
+                <t t-set="date" t-value="week_date_list[1]"/>
+                <div><t t-esc="week"/></div>
+                <br/>
+                <div><t t-esc="date"/></div>
+            </th>
+
+        </t>
+
+    </t>
+</templates>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="fixed_asset_template_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="text-center">
+                    <b>Fixed Asset Report</b>
+                    <br/>
+                    <br/>
+                    <b>
+                        <span t-esc="str(start_date) + ' TO ' + str(end_date)"/>
+                    </b>
+                </div>
+                <br/>
+                <table class="table" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Disposed Date</th>
+                            <th>Description</th>
+                            <th>Analytic Tag</th>
+                            <th>PO</th>
+                            <th class="text-right">Dep Years</th>
+                            <th class="text-right">Beg Cost</th>
+                            <th class="text-right">Purchase</th>
+                            <th class="text-right">Disposed</th>
+                            <th class="text-right">End Cost</th>
+                            <th class="text-right">Beg Acc Dep</th>
+                            <th class="text-right">Depreciation</th>
+                            <th class="text-right">Disposal</th>
+                            <th class="text-right">End Acc Dep</th>
+                            <th class="text-right">Net Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="lines" t-value="[]"/>
+                        <t t-set="total_beg_cost" t-value="0.00"/>
+                        <t t-set="total_purchase" t-value="0.00"/>
+                        <t t-set="total_disposed" t-value="0.00"/>
+                        <t t-set="total_end_cost" t-value="0.00"/>
+                        <t t-set="total_beg_acc_dep" t-value="0.00"/>
+                        <t t-set="total_depreciation" t-value="0.00"/>
+                        <t t-set="total_disposal" t-value="0.00"/>
+                        <t t-set="total_end_acc_dep" t-value="0.00"/>
+                        <t t-set="total_net_value" t-value="0.00"/>
+                        <t t-foreach="data" t-as="categ">
+                            <t t-set="categ_beg_cost" t-value="0.00"/>
+                            <t t-set="categ_purchase" t-value="0.00"/>
+                            <t t-set="categ_disposed" t-value="0.00"/>
+                            <t t-set="categ_end_cost" t-value="0.00"/>
+                            <t t-set="categ_beg_acc_dep" t-value="0.00"/>
+                            <t t-set="categ_depreciation" t-value="0.00"/>
+                            <t t-set="categ_disposal" t-value="0.00"/>
+                            <t t-set="categ_end_acc_dep" t-value="0.00"/>
+                            <t t-set="categ_net_value" t-value="0.00"/>
+                            <t t-set="lines" t-value="docs.with_context(
+                                zero_lines=hide_zero_lines).get_category_data(categ, move_ids, start_date, end_date)"/>
+                            <t t-if="lines">
+                                <tr>
+                                    <td colspan="13">
+                                        <t t-if="categ">
+                                            <b>
+                                                <span t-field="categ.name"/>
+                                            </b>
+                                        </t>
+                                        <t t-else="">
+                                            <b>
+                                                <span>Undefined</span>
+                                            </b>
+                                        </t>
+                                    </td>
+                                    <t t-if="lines">
+                                        <td colspan="13"/>
+                                    </t>
+                                    <t t-else="">
+                                        <td colspan="14"/>
+                                    </t>
+                                </tr>
+                            </t>
+                            <t t-foreach="lines" t-as="main">
+                                <tr t-attf-style="background-color: #{'lightgrey' if  main['disposed'] > 0.00 else ''}">
+                                    <td colspan="2" class="text-right">
+                                        <span t-esc="main['date']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['disposal_date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="main['description']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="main['analytic_tags']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="main['journal_entry']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="main['po_name']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['dep_year']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['beg_cost']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_beg_cost"
+                                           t-value="categ_beg_cost + main['beg_cost']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['purchase']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_purchase"
+                                           t-value="categ_purchase + main['purchase']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['disposed']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_disposed"
+                                           t-value="categ_disposed + main['disposed']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['end_cost']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_end_cost"
+                                           t-value="categ_end_cost + main['end_cost']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['beg_acc_dep']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_beg_acc_dep"
+                                           t-value="categ_beg_acc_dep + main['beg_acc_dep']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['depreciation']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_depreciation"
+                                           t-value="categ_depreciation + main['depreciation']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['disposal']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_disposal"
+                                           t-value="categ_disposal + main['disposal']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['end_acc_dep']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_end_acc_dep"
+                                           t-value="categ_end_acc_dep + main['end_acc_dep']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="main['net_value']"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                        <t t-set="categ_net_value"
+                                           t-value="categ_net_value + main['net_value']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="7" class="text-right">
+                                    <t t-if="categ">
+                                        <b>
+                                            Total of
+                                            <t t-esc="categ.name"/>
+                                        </b>
+                                    </t>
+                                    <t t-else="">
+                                        <b>Total of Undefined Category</b>
+                                    </t>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_beg_cost"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_beg_cost"
+                                       t-value="total_beg_cost + categ_beg_cost"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_purchase"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_purchase"
+                                       t-value="total_purchase + categ_purchase"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_disposed"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_disposed"
+                                       t-value="total_disposed + categ_disposed"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_end_cost"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_end_cost"
+                                       t-value="total_end_cost + categ_end_cost"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_beg_acc_dep"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_beg_acc_dep"
+                                       t-value="total_beg_acc_dep + categ_beg_acc_dep"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_depreciation"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_depreciation"
+                                       t-value="total_depreciation + categ_depreciation"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_disposal"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_disposal"
+                                       t-value="total_disposal + categ_disposal"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_end_acc_dep"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_end_acc_dep"
+                                       t-value="total_end_acc_dep + categ_end_acc_dep"/>
+                                </td>
+                                <td class="text-right">
+                                    <b>
+                                        <span t-esc="categ_net_value"
+                                              t-options='{"widget": "monetary",
+                                              "display_currency": docs.env.user.company_id.currency_id}'/>
+                                    </b>
+                                    <t t-set="total_net_value"
+                                       t-value="total_net_value + categ_net_value"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="7" class="text-right">
+                                <b>Total</b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_beg_cost"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_purchase"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_disposed"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_end_cost"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_beg_acc_dep"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_depreciation"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_disposal"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_end_acc_dep"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="total_net_value"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency": docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="page-break-before:always;"/>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="fixed_asset_template">
+        <t t-call="web.html_container">
+            <t t-call="account_asset_extension.fixed_asset_template_document"/>
+        </t>
+    </template>
+</odoo>

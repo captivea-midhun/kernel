@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+    <t t-extend="reconciliation.line.create">
+        <t t-jquery="div.o_group table.o_inner_group tbody tr.create_to_check" t-operation="after">
+            <tr class="create_to_attachment">
+                <td class="o_td_label"><label class="o_form_label">Attachment</label></td>
+                <td class="o_td_field"/>
+            </tr>
+        </t>
+    </t>
+</templates>

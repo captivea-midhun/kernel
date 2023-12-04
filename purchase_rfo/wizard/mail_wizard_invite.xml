@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- wizard view -->
+        <record model="ir.ui.view" id="inherit_mail_wizard_invite_form">
+            <field name="name">Inherit Add Followers</field>
+            <field name="model">mail.wizard.invite</field>
+            <field name="inherit_id" ref="mail.mail_wizard_invite_form"/>
+            <field name="arch" type="xml">
+                <field name="message" position="after">
+                    <field name="template_id" invisible='1'/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

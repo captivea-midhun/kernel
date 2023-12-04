@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="categ_computers" model="maintenance.equipment.category">
+        <field name="name">Computers</field>
+        <field name="display_cate_field">True</field>
+        <field name="show_mac_address">True</field>
+    </record>
+
+    <record id="categ_instruments" model="maintenance.equipment.category">
+        <field name="name">Instruments</field>
+        <field name="display_cate_field">False</field>
+        <field name="show_mac_address">True</field>
+    </record>
+
+    <record id="categ_network_equipment" model="maintenance.equipment.category">
+        <field name="name">Network Equipment</field>
+        <field name="display_cate_field">False</field>
+        <field name="show_mac_address">True</field>
+    </record>
+
+    <record id="categ_printers" model="maintenance.equipment.category">
+        <field name="name">Printers</field>
+        <field name="display_cate_field">False</field>
+        <field name="show_mac_address">True</field>
+    </record>
+
+    <record id="categ_appliances" model="maintenance.equipment.category">
+        <field name="name">Appliances</field>
+        <field name="display_cate_field">False</field>
+        <field name="show_mac_address">False</field>
+    </record>
+
+    <record id="categ_other" model="maintenance.equipment.category">
+        <field name="name">Other</field>
+        <field name="display_cate_field">False</field>
+        <field name="show_mac_address">False</field>
+    </record>
+</odoo>

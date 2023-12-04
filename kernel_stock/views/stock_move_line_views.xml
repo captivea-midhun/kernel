@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Remove group by product from traceability -->
+    <record id="stock.stock_move_line_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_done': 1, 'search_default_groupby_product_id': 0,
+            'create': 0}
+        </field>
+    </record>
+
+    <!-- Inhertied Stock Move Line Tree view ,added default_order date desc-->
+    <record id="view_stock_move_line_tree_inherit_added_date_desc_order" model="ir.ui.view">
+        <field name="name">view.stock.move.line.inherit.added_date_desc_default_order</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">date desc</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

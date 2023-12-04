@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_move_lot_form_inherited" model="ir.ui.view">
+        <field name="name">stock.move.lots.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="mrp.view_stock_move_lots"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_line_ids']/tree/field[@name='lot_id']"
+                   position="after">
+                <field name="location_id" string="Location"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

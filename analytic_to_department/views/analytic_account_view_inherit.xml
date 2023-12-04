@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="analytic.action_account_analytic_account_form"
+            model="ir.actions.act_window">
+        <field name="name">Department</field>
+    </record>
+
+    <record model="ir.ui.view"
+            id="view_account_invoice_report_search_analytic_accounting_inherit">
+        <field name="name">account.invoice.report.search.analytic.accounting</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id"
+               ref="account.view_account_invoice_report_search_analytic_accounting"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='analytic_account_id']" position="attributes">
+                <attribute name="string">Department</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_analytic_account_search_inherit">
+        <field name="name">account.account.analytic.account.search.analytic.accounting</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Department</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_analytic_line_filter_inherit">
+        <field name="name">account.analytic.line.search.analytic.accounting</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='account_id']" position="attributes">
+                <attribute name="string">Department</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.menu" id="account.account_analytic_def_account">
+        <field name="name">Department</field>
+    </record>
+    <record model="ir.ui.menu" id="account.menu_analytic_accounting">
+        <field name="name">Department</field>
+    </record>
+</odoo>

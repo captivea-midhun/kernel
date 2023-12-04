@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_form_view_kernal_inherit" model="ir.ui.view">
+        <field name="name">kernal.product.category.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="type"/>
+            </field>
+            <group name="first" position="after">
+                <group string="Traceability" name="traceability"
+                       groups="stock.group_production_lot"
+                       attrs="{'invisible': [('type', '!=', 'product')]}">
+                    <field name="tracking" widget="radio"
+                           attrs="{'invisible': [('type', 'in', ['service', 'digital'])]}"/>
+                </group>
+                <group name="Category Field Selection">
+                    <group string="Custom Mandatory Fields">
+                        <field name="is_material" string="Material"/>
+                        <field name="is_thread_size" string="Thread Size"/>
+                        <field name="is_cat_length" string="Length"/>
+                        <field name="is_cat_id" string="ID"/>
+                        <field name="is_od" string="OD"/>
+                        <field name="is_dash" string="Dash#"/>
+                        <field name="is_wire_diameter" string="Wire Diameter"/>
+                        <field name="is_free_length" string="Free Length"/>
+                        <field name="is_brand" string="Brand"/>
+                        <field name="is_resistance" string="Resistance"/>
+                        <field name="is_size" string="Size"/>
+                        <field name="is_capacitance" string="Capacitance"/>
+                        <field name="is_turn_ratio" string="Turn Ratio"/>
+                        <field name="is_inductance" string="Inductance"/>
+                        <field name="is_cat_type" string="Semiconductors Type"/>
+                        <field name="is_cat_solder" string="Solder Type"/>
+                        <field name="is_cat_3dprint" string="3D Print Type"/>
+                        <field name="is_signals" string="Signals"/>
+                        <field name="is_gauge" string="Gauge"/>
+                        <field name="is_coating" string="Coating"/>
+                        <field name="is_focal_length" string="Focal Length"/>
+                        <field name="is_polarization" string="Polarization"/>
+                        <field name="is_thickness" string="Thickness"/>
+                        <field name="is_width" string="Width"/>
+                        <field name="is_barcode" string="Barcode"/>
+                    </group>
+                    <group string="Custom Optional Fields">
+                        <field name="is_magnetism" string="Magnetism"/>
+                        <field name="is_compressed_length" string="Compressed Length"/>
+                        <field name="is_opt_cat_id" string="ID"/>
+                        <field name="is_opt_od" string="OD"/>
+                        <field name="is_press_slip" string="Press/slip"/>
+                        <field name="is_pins" string="# Pins"/>
+                        <field name="is_finish" string="Finish"/>
+                        <field name="is_weight" string="Weight"/>
+                        <field name="is_brand_opt" string="Brand"/>
+                        <field name="is_warranty" string="Warranty"/>
+                        <field name="is_pdp_url" string="Product Data Page (URL)"/>
+                        <field name="is_mac_address" string="MAC Address"/>
+                        <field name="is_mac_bluetooth" string="Bluetooth MAC"/>
+                        <field name="is_disk_space" string="Disk Space"/>
+                        <field name="is_memory" string="Memory"/>
+                        <field name="is_processor" string="Processor"/>
+                        <field name="is_cpu_speed" string="CPU Speed"/>
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <record id="product_category_search_view_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.order.select</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <group expand="0" string="Group By">
+                    <filter name="group_by_parent_id" string="Parent Category" domain="[]"
+                            context="{'group_by': 'parent_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="product.product_category_action_form">
+        <field name="context">{'search_default_group_by_parent_id':1}</field>
+    </record>
+</odoo>

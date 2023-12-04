@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_table_header_tree" model="ir.ui.view">
+        <field name="name">table.header.tree.view</field>
+        <field name="model">table.header</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="operator"/>
+                <field name="part_number"/>
+                <field name="serial_number"/>
+                <field name="datetime"/>
+                <field name="filename"/>
+                <field name="temperature"/>
+                <field name="pass_fail"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_table_header_form" model="ir.ui.view">
+        <field name="name">table.header.form.view</field>
+        <field name="model">table.header</field>
+        <field name="arch" type="xml">
+            <form string="Table Header">
+                <sheet>
+                    <group>
+                        <group>
+                            <label for="part_number"/>
+                            <div class="o_row">
+                                <field name="part_number" required="1"/>
+                                <field name="product_id" readonly="1"
+                                       attrs="{'invisible': [('product_id','=',False)]}"/>
+                            </div>
+                            <field name="serial_number"
+                                   required="1"/>
+                            <field name="operator"/>
+                            <field name="notes"/>
+                            <field name="station"/>
+                        </group>
+                        <group>
+                            <field name="datetime"/>
+                            <field name="step"/>
+                            <field name="filename" readonly="1"/>
+                            <field name="temperature"/>
+                            <field name="pass_fail"/>
+                            <field name="bin"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Table SubTests" name="mrp_table_subtests">
+                            <field name="table_subtest_ids">
+                                <tree editable="bottom">
+                                    <field name="parameter"/>
+                                    <field name="result"/>
+                                    <field name="parent_parameter"/>
+                                    <field name="pf"/>
+                                    <field name="channel"/>
+                                    <field name="hid" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="parameter"/>
+                                            <field name="result"/>
+                                        </group>
+                                        <group>
+                                            <field name="parent_parameter"/>
+                                            <field name="pf"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Graph-->
+    <record id="view_table_header_graph" model="ir.ui.view">
+        <field name="name">Table Header Graph</field>
+        <field name="model">table.header</field>
+        <field name="arch" type="xml">
+            <graph string="Graph View" type="line">
+                <field name="datetime" interval="day"/>
+                <field name="pass_fail"/>
+            </graph>
+        </field>
+    </record>
+
+    <!--Dashboard-->
+    <record id="view_table_header_dashboard" model="ir.ui.view">
+        <field name="name">view.table.header.dashboard</field>
+        <field name="model">table.header</field>
+        <field name="arch" type="xml">
+            <dashboard>
+                <view type="graph"
+                      ref="mrp_test_result.view_table_header_graph"/>
+                <group>
+                    <group col="1">
+                        <widget name="pie_chart" title="Bin" attrs="{'groupby': 'bin'}"/>
+                    </group>
+                </group>
+            </dashboard>
+        </field>
+    </record>
+
+    <record id="action_mrp_test_table_header" model="ir.actions.act_window">
+        <field name="name">MRP Test Result</field>
+        <field name="res_model">table.header</field>
+        <field name="view_mode">tree,form,dashboard</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new MRP Test Result
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_mrp_test_table_header"
+              name="MRP Test Result" action="action_mrp_test_table_header"
+              parent="mrp.menu_mrp_manufacturing" sequence="99"
+              groups="mrp_test_result.group_mrp_test_result_module"/>
+</odoo>

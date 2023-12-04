@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_move_line_journal_match_tree" model="ir.ui.view">
+            <field name="name">Account Move Line Journal Match Fields In Tree</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="analytic_account_id" position="before">
+                    <field name="hide_clearing"/>
+                    <field name="match_amount_sum"/>
+                    <field name="previous_match"/>
+                    <field name="manual_match"/>
+                </field>
+
+            </field>
+        </record>
+        <record id="account_move_line_journal_match_form" model="ir.ui.view">
+            <field name="name">Account Move Line Journal Match Fields In Form</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page/group/group[1]" position="inside">
+                    <field name="hide_clearing" readonly="1"/>
+                    <field name="match_amount_sum" readonly="1"/>
+                    <field name="previous_match" readonly="1"/>
+                    <field name="manual_match" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+<!--        <record id="account.action_account_moves_all" model="ir.actions.act_window">-->
+<!--            <field name="domain">[('display_type', 'not in', ('line_section', 'line_note')), ('move_id.state', '!=', 'cancel'),('hide_clearing','=',False)]</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

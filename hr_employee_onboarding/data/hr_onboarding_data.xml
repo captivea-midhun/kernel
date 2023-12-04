@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pre Hiring Data -->
+    <record model="hr.pre.hire.onboarding" id="prehire_welcome_mail">
+        <field name="name">Prior to Welcome Email - Collect Software Requirements,Start Time
+            from Hiring Manager, ask who should be in team lunch
+        </field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="welcome_package_email">
+        <field name="name">Welcome Package/Email</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="preferred_laptop">
+        <field name="name">Preferred Laptop</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="sr_hiring_manager">
+        <field name="name">Software Requirements from Hiring Manager</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="permission_data_access">
+        <field name="name">Permission/Data Access</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="start_time">
+        <field name="name">Start Time</field>
+        <field name="sequence">7</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="new_hire_buddy">
+        <field name="name">New Hire Buddy</field>
+        <field name="sequence">8</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="schedule_team_lunch">
+        <field name="name">Schedule team lunch</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record model="hr.pre.hire.onboarding" id="parking_pass">
+        <field name="name">Parking Pass Info</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Post Hiring Data -->
+    <record model="hr.post.hire.onboarding"
+            id="add_remote_vacation_calender">
+        <field name="name">Add Remote/Vacation on Calendar</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="hr.post.hire.onboarding" id="add_kernel_anniversary_bday">
+        <field name="name">Add Kernel Anniversary and Birthday on Calendar</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record model="hr.post.hire.onboarding" id="add_company_directory">
+        <field name="name">Add to Who's Who, Company Directory, and Team Org pages on Confluence</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record model="hr.post.hire.onboarding" id="send_out_who">
+        <field name="name">Send out Who is Who</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <record model="hr.post.hire.onboarding" id="create_litmos_account">
+        <field name="name">Create Litmos Account, Assign Courses</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record model="hr.post.hire.onboarding" id="schedule_consent_meeting">
+        <field name="name">Schedule Consent Form Meeting</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record model="hr.post.hire.onboarding" id="schedule_welcome_meeting_bryan">
+        <field name="name">Schedule Welcome Meeting with Bryan</field>
+        <field name="sequence">7</field>
+    </record>
+
+    <!-- HR offer Onboarding Data -->
+    <record model="hr.offer.onboarding" id="setup_event_paylocity">
+        <field name="name">Set up Event in Paylocity</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="hr.offer.onboarding" id="sent_background_check">
+        <field name="name">Sent Background Check</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- HR offer Post Hire Onboarding Data -->
+    <record model="hr.offer.post.hire.onboarding" id="new_employee_orientation">
+        <field name="name">New Employee Orientation</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="hr.offer.post.hire.onboarding" id="pay_rate_notice">
+        <field name="name">Pay Rate Notice (Docusign)</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record model="hr.offer.post.hire.onboarding" id="benefit_information_email">
+        <field name="name">Benefit Information Email</field>
+        <field name="sequence">3</field>
+    </record>
+	
+	<!-- Removed August 23, 2021 per Srbouhi's request - Sebastien G./Captivea
+    <record model="hr.offer.post.hire.onboarding" id="enroll_uhc_website">
+        <field name="name">Enroll on UHC website</field>
+        <field name="sequence">4</field>
+    </record>
+	
+    <record model="hr.offer.post.hire.onboarding" id="enroll_hartford_website">
+        <field name="name">Enroll on Hartford website</field>
+        <field name="sequence">5</field>
+    </record>
+	-->
+	
+	<!-- Added August 23, 2021 per Srbouhi's request - Sebastien G./Captivea -->
+	<!-- ***** START ***** -->
+	<record model="hr.offer.post.hire.onboarding" id="enroll_medical">
+        <field name="name">Enroll Medical</field>
+        <field name="sequence">4</field>
+    </record>
+	
+	<record model="hr.offer.post.hire.onboarding" id="enroll_dental">
+        <field name="name">Enroll Dental</field>
+        <field name="sequence">5</field>
+    </record>
+
+	<record model="hr.offer.post.hire.onboarding" id="enroll_vision">
+        <field name="name">Enroll Vision</field>
+        <field name="sequence">6</field>
+    </record>
+	
+	<record model="hr.offer.post.hire.onboarding" id="enroll_life_disability">
+        <field name="name">Enroll Life and ADHD, Short and Long Term Disability</field>
+        <field name="sequence">7</field>
+    </record>
+	<!-- ***** END ***** -->
+	
+    <record model="hr.offer.post.hire.onboarding" id="employee_insurence_information">
+        <field name="name">Send insurance information to employee</field>
+        <field name="sequence">8</field>
+    </record>
+
+    <record model="hr.offer.post.hire.onboarding" id="betterment_website">
+        <field name="name">Add on Betterment website</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record model="hr.offer.post.hire.onboarding" id="401_disclousre">
+        <field name="name">401(k) Disclosure (3 documents)</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record model="hr.offer.post.hire.onboarding" id="i9_document_verified">
+        <field name="name">I-9 Document verified</field>
+        <field name="sequence">11</field>
+    </record>
+
+    <!-- HR Options Onboarding Data -->
+    <record model="hr.options.onboarding" id="stock_options">
+        <field name="name">Stock Options</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="hr.options.onboarding" id="signed_manager_consent">
+        <field name="name">Signed Manager Consent</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="hr.options.onboarding" id="stock_options_google_doc">
+        <field name="name">Stock Options entered in Google Doc</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- HR Operations Onboarding Data -->
+    <record model="hr.operations.onboarding" id="set_up_desk_workspace">
+        <field name="name">Set up desk/workspace</field>
+        <field name="sequence">1</field>
+    </record>
+	<!-- Added on 1/31/2022 by Captivea -->
+	<record model="hr.operations.onboarding" id="welcome_sign_operations">
+        <field name="name">Welcome Sign</field>
+        <field name="sequence">2</field>
+    </record>
+	<record model="hr.operations.onboarding" id="kernel_tshirt_swag_operations">
+        <field name="name">Kernel T-Shirt/Swag</field>
+        <field name="sequence">3</field>
+    </record>
+	<!-- <record model="hr.operations.onboarding" id="send_jira_first_day_list_link_operations"> -->
+        <!-- <field name="name">Send JIRA First Day List link</field> -->
+        <!-- <field name="sequence">4</field> -->
+    <!-- </record> -->
+	<!-- HR Security Onboarding Data -->
+	<record model="hr.secure.onboarding" id="reception_activate_badge_secure">
+        <field name="name">Activate Badge</field>
+        <field name="sequence">1</field>
+    </record>
+	<record model="hr.secure.onboarding" id="take_badge_photo">
+        <field name="name">Take Badge Photo</field>
+        <field name="sequence">2</field>
+    </record>
+	<record model="hr.secure.onboarding" id="update_security_binder_secure">
+        <field name="name">Update Employee Directory Folder</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- HR Reception Onboarding Data -->
+    <!-- Move to Operations Tab on 1/31/2022 per Anh's request - Captivea -->
+	<!-- <record model="hr.reception.onboarding" id="send_jira_first_day_list_link"> -->
+        <!-- <field name="name">Send JIRA First Day List link</field> -->
+        <!-- <field name="sequence">1</field> -->
+    <!-- </record> -->
+	<!-- <record model="hr.reception.onboarding" id="kernel_tshirt_swag"> -->
+        <!-- <field name="name">Kernel T-Shirt/Swag</field> -->
+        <!-- <field name="sequence">2</field> -->
+    <!-- </record> -->
+	<!-- <record model="hr.reception.onboarding" id="welcome_sign"> -->
+        <!-- <field name="name">Welcome Sign</field> -->
+        <!-- <field name="sequence">3</field> -->
+    <!-- </record> -->
+    <record model="hr.reception.onboarding" id="add_employee_to_parking_form">
+        <field name="name">Add Employee to Parking Form</field>
+        <field name="sequence">1</field>
+    </record>
+	<record model="hr.reception.onboarding" id="add_employee_to_kernel_birthdays">
+        <field name="name">Add Employee to Kernel Birthdays and Anniversaries Form</field>
+        <field name="sequence">2</field>
+    </record>
+    <!-- Move to Security Tab on 1/31/2022 per Anh's request - Captivea -->
+	<!-- <record model="hr.reception.onboarding" id="reception_activate_badge"> -->
+        <!-- <field name="name">Activate Badge</field> -->
+        <!-- <field name="sequence">3</field> -->
+    <!-- </record> -->
+    <!-- <record model="hr.reception.onboarding" id="update_security_binder"> -->
+        <!-- <field name="name">Update the Security Binder</field> -->
+        <!-- <field name="sequence">4</field> -->
+    <!-- </record> -->
+
+</odoo>

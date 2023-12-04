@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="emoji_logo_form_view" model="ir.ui.view">
+            <field name="name">mrp_mps_extended.emoji_logo.form</field>
+            <field name="model">emoji.logo</field>
+            <field name="arch" type="xml">
+                <form string="Emoji">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                                <field name="logo" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="emoji_logo_tree_view" model="ir.ui.view">
+            <field name="name">mrp_mps_extended.emoji_logo.tree</field>
+            <field name="model">emoji.logo</field>
+            <field name="arch" type="xml">
+                <tree string="Emoji">
+                    <field name="name"/>
+                    <field name="logo"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="emoji_logo_search_view" model="ir.ui.view">
+            <field name="name">mrp_mps_extended.emoji_logo.search</field>
+            <field name="model">emoji.logo</field>
+            <field name="arch" type="xml">
+                <search string="Emoji">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="emoji_logo_act_window" model="ir.actions.act_window">
+            <field name="name">Emoji</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">emoji.logo</field>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Emoji.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Emoji" id="emoji_logo_menu" parent="stock.menu_product_in_config_stock" action="emoji_logo_act_window"/>
+
+
+    </data>
+</odoo>

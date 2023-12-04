@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Initialized mrp test result config record  -->
+    <record id="default_config_record_data" model="mrp.test.result.config">
+        <field name="file_path">/home/odoo/data/</field>
+        <field name="error_file_read_path">/home/odoo/data/errors_files/</field>
+        <field name="success_file_read_path">/home/odoo/data/success_files/</field>
+    </record>
+
+</odoo>

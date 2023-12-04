@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_kernel" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40"/>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='purchase']//div[@name='purchase_setting_container']"
+                   position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Default Project</span>
+                        <div class="text-muted">
+                            Set project for RFO,
+                            it will be use for when create RFO from reordering rule
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16 ml0">
+                                <field name="department_id"
+                                       options="{'no_create_edit': True, 'no_open': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">RFO Terms &amp; Conditions</span>
+                        <div class="text-muted">
+                            Show Standard terms &amp; conditions on RFO/Purchase Orders
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16 ml0">
+                                <field name="terms_conditions"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Default Expense Account</span>
+                        <div class="text-muted">
+                            Set expense account for RFO,
+                            it will be use for when create RFO from reordering rule
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16 ml0">
+                                <field name="po_expense_account_id"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Purchase Order Expense Account</span>
+                        <div class="text-muted">
+                            Set expense account for RFO,
+                            it will be used for when Inventory Product is added on
+                            Purchase Order Line.
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16 ml0">
+                                <field name="inventoried_product_expense_account_id" required="1"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

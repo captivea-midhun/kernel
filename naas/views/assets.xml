@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="assets_backend" name="NaaS assets" inherit_id="web.assets_backend">
+      <xpath expr="//script[last()]" position="after">
+          <script type="text/javascript" src="/naas/static/src/js/calendar.js"></script>
+      </xpath>
+      <xpath expr="//link[last()]" position="after">
+          <link rel="stylesheet" type="text/css" href="/naas/static/src/css/calendar.css"/>
+      </xpath>
+  </template>
+</odoo>

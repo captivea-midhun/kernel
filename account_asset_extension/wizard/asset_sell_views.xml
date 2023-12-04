@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="asset_sell_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">wizard.asset.sell.form</field>
+        <field name="model">account.asset.sell</field>
+        <field name="inherit_id" ref="account_asset.asset_sell_form"/>
+        <field name="arch" type="xml">
+            <field name="loss_account_id" position="after">
+                <field name="dispose_date"
+                       attrs="{'invisible': [('action','!=','dispose')],
+                            'required': [('gain_or_loss','=', 'no')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

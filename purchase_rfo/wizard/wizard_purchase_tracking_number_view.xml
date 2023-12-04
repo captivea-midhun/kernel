@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_po_tracking_number_view" model="ir.ui.view">
+        <field name="name">purchase.tracking.number</field>
+        <field name="model">wizard.purchase.tracking.number</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Tracking Number">
+                <group>
+                    <field name="purchase_id" invisible="1"/>
+                    <field name="courier_id" required="1"/>
+                    <field name="po_tracking_number" required="1"/>
+                </group>
+                <footer>
+                    <button name="action_set_tracking_number" string="Set" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_po_tracking_number_view_action" model="ir.actions.act_window">
+        <field name="name">Purchase Tracking Number</field>
+        <field name="res_model">wizard.purchase.tracking.number</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_po_tracking_number_view"/>
+        <field name="context">{'default_purchase_id': active_id}</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

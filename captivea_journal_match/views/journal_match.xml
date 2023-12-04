@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="journal_match_form_view" model="ir.ui.view">
+            <field name="name">journal.match.wizard.form</field>
+            <field name="model">journal.match.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Journal Match">
+                    <sheet>
+                        <group>
+                            <field name="process_succeed" invisible="1"/>
+                            <field name="pop_notification" invisible="1"/>
+                                <field name="notification" readonly="1" nolabel="1"
+                                       attrs="{'invisible':[('pop_notification','=',False)]}"/>
+                            <group>
+
+                                <field name="manual_match_value" attrs="{'invisible':[('pop_notification','=',True)]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button type="object" invisible="not context.get('match_ids',False)"
+                                name="show_reflected_entries" string="Show Reflected Entries" class="oe_highlight" attrs="{'invisible':[('process_succeed','=',False)]}"/>
+                        <button type="object" attrs="{'invisible':[('pop_notification','=',True)]}" string="Update" name="update_moves" class="oe_highlight"/>
+                        <button special="cancel" string="Close"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="account_move_line_journal_match_wizard_act_window" model="ir.actions.server">
+            <field name="name">Journal Match</field>
+            <field name="binding_model_id" ref="model_account_move_line"/>
+            <field name="model_id" ref="model_account_move_line"/>
+            <field name="state">code</field>
+            <field name="code">action = model.open_journal_match_wizard()</field>
+        </record>
+    </data>
+</odoo>

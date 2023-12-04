@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_update_product_category_form_view" model="ir.ui.view">
+            <field name="name">update.product.category.form.view</field>
+            <field name="model">update.product.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="categ_id" required="True"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products" name="product_data">
+                            <field name="product_data_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id" readonly="True"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="product_id" readonly="True"/>
+                                        </group>
+                                        <group>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="update_product_category" string="Update" type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

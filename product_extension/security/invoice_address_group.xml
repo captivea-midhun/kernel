@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_invoice_address" model="res.groups">
+        <field name="name">Is Invoice address Email</field>
+        <field name="comment">User belongs to this group can change invoice address of supplier.
+        </field>
+    </record>
+
+    <record id="stock.access_product_group_res_partner_stock_manager" model="ir.model.access">
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

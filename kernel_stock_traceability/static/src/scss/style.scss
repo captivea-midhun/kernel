@@ -1,0 +1,9 @@
+.o_stock_reports_page {
+    .o_stock_reports_table {
+        tr.text-danger, tr.text-success {
+            a {
+                color: inherit;
+            }
+        }
+    }
+}

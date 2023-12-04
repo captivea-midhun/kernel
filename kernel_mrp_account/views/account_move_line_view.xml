@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Journal item form view -->
+    <record id='journal_item_form_view_mrp_kernal' model='ir.ui.view'>
+        <field name='name'>journal.item.form.view.mrp.kernel</field>
+        <field name='model'>account.move.line</field>
+        <field name='inherit_id' ref='account.view_move_line_form'/>
+        <field name='arch' type='xml'>
+            <field name="move_id" position="after">
+                <field name="production_id" readonly="1"
+                       string="Source Document"
+                       attrs="{'invisible': [('production_id', '==', False)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

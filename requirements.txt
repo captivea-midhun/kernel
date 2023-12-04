@@ -1,0 +1,3 @@
+numpy
+reportlab
+PyPDF2

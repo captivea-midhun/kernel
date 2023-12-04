@@ -1,0 +1,16 @@
+{
+    'name': 'Captivea Product Archiving',
+    'version': '5.0',
+    'author': 'Captivea LLC',
+    'category': 'Inventory',
+    'website': 'https://www.captivea.us',
+    'description': 'Captivea Product Archiving',
+    'depends': ['stock', 'sale','mrp'],
+    'data': ['views/res_config_settings_view.xml',
+             'views/product_product.xml',
+             'wizard/captivea_product_archiving_wizard.xml',
+             'data/ir_cron.xml'],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

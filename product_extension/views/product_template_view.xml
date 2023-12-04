@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_product_template_search_view" model="ir.ui.view">
+        <field name="name">product.template.search.inherited</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="manufacturer" string="Manufacturer"
+                       filter_domain="[('manufacturer', 'ilike', self)]"/>
+            </xpath>
+
+            <!-- Inherited search view to search vendor product code by default -->
+            <xpath expr="//search/field[@name='name']" position="replace">
+                <field name="name" string="Product" filter_domain="['|', '|', '|', '|',
+                    ('default_code', 'ilike', self),
+                    ('product_variant_ids.default_code', 'ilike', self),
+                    ('name', 'ilike', self), ('barcode', 'ilike', self),
+                    ('seller_ids.product_code', 'ilike', self)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_button_inherit_kernel" model="ir.ui.view">
+        <field name="name">Product.template.button.inherit.kernel</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_update_quantity_on_hand']" position="after">
+                <button string="Archive" name="archive_button" type="object"
+                        attrs="{'invisible': [('active', '=', False)]}"/>
+                <button string="Unarchive" name="unarchive_button" type="object"
+                        confirm="Are you sure you want to unarchive this record?"
+                        attrs="{'invisible': [('active', '=', True)]}"/>
+                <button string="Delete" name="delete_button" type="object"
+                        confirm="Are you sure you want to delete this record?"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_product_button_inherit_kernel" model="ir.ui.view">
+        <field name="name">Product.product.button.inherit.kernel</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_update_quantity_on_hand']" position="after">
+                <button string="Archive" name="archive_button" type="object"
+                        attrs="{'invisible': [('active', '=', False)]}"/>
+                <button string="Unarchive" name="unarchive_button" type="object"
+                        confirm="Are you sure you want to unarchive this record?"
+                        attrs="{'invisible': [('active', '=', True)]}"/>
+                <button string="Delete" name="delete_button" type="object"
+                        confirm="Are you sure you want to delete this record?"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_normal_form_view_inherit_kernel" model="ir.ui.view">
+        <field name="name">product.template.form.kernel</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_information']/group/group[@name='group_general']"
+                   position="replace">
+                <group name="group_general">
+                    <field name="active" invisible="1"/>
+                    <field name="categ_id" string="Product Category"/>
+                    <field name="type" readonly="1" force_save="1"/>
+                    <field name="default_code" string="Mfr SKU"
+                           attrs="{'invisible': [('product_variant_count', '&gt;', 1)]}"/>
+                    <field name="barcode"
+                           attrs="{'invisible': [('product_variant_count', '&gt;', 1)]}"/>
+                    <field name="location_id" domain="[('usage','=','internal')]"/>
+                    <field name="putaway_rule_ids" invisible="1">
+                        <tree>
+                            <field name="location_in_id"/>
+                            <field name="location_out_id"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='general_information']/group/group[@name='group_general']/field[@name='type']"
+                   position="attributes">
+                <attribute name="context">{'from_type': True}</attribute>
+            </xpath>
+            <xpath expr="//page[@name='general_information']" position="inside">
+                <group>
+                    <!-- Category CheckBox -->
+                    <field name="is_material" invisible="1"/>
+                    <field name="is_thread_size" invisible="1"/>
+                    <field name="is_cat_length" invisible="1"/>
+                    <field name="is_cat_id" invisible="1"/>
+                    <field name="is_od" invisible="1"/>
+                    <field name="is_dash" invisible="1"/>
+                    <field name="is_wire_diameter" invisible="1"/>
+                    <field name="is_free_length" invisible="1"/>
+                    <field name="is_brand" invisible="1"/>
+                    <field name="is_resistance" invisible="1"/>
+                    <field name="is_size" invisible="1"/>
+                    <field name="is_capacitance" invisible="1"/>
+                    <field name="is_turn_ratio" invisible="1"/>
+                    <field name="is_inductance" invisible="1"/>
+                    <field name="is_cat_type" invisible="1"/>
+                    <field name="is_cat_solder" invisible="1"/>
+                    <field name="is_cat_3dprint" invisible="1"/>
+                    <field name="is_signals" invisible="1"/>
+                    <field name="is_gauge" invisible="1"/>
+                    <field name="is_coating" invisible="1"/>
+                    <field name="is_focal_length" invisible="1"/>
+                    <field name="is_polarization" invisible="1"/>
+                    <field name="is_thickness" invisible="1"/>
+                    <field name="is_width" invisible="1"/>
+                    <field name="is_barcode" invisible="1"/>
+                    <!-- optional -->
+                    <field name="is_magnetism" invisible="1"/>
+                    <field name="is_compressed_length" invisible="1"/>
+                    <field name="is_press_slip" invisible="1"/>
+                    <field name="is_pins" invisible="1"/>
+                    <field name="is_finish" invisible="1"/>
+                    <field name="is_weight" invisible="1"/>
+                    <field name="is_brand_opt" invisible="1"/>
+                    <field name="is_warranty" invisible="1"/>
+                    <field name="is_pdp_url" invisible="1"/>
+                    <field name="is_mac_address" invisible="1"/>
+                    <field name="is_mac_bluetooth" invisible="1"/>
+                    <field name="is_disk_space" invisible="1"/>
+                    <field name="is_memory" invisible="1"/>
+                    <field name="is_processor" invisible="1"/>
+                    <field name="is_cpu_speed" invisible="1"/>
+                    <field name="is_opt_cat_id" invisible="1"/>
+                    <field name="is_opt_od" invisible="1"/>
+                    <!-- Category field -->
+                    <group string="Mandatory Fields">
+                        <field name="material" string="Material"
+                               attrs="{'invisible': [('is_material','=',False)],
+                               'required': [('is_material','!=',False)]}"
+                               placeholder="Nylon 6, Glass N-BK7, Ti Grade 5"/>
+                        <field name="thread_size"
+                               string="Thread SIze"
+                               attrs="{'invisible': [('is_thread_size','=',False)],
+                               'required': [('is_thread_size','!=',False)]}"
+                               placeholder="1/4-20, M5"/>
+                        <field name="cat_length" string="Length"
+                               attrs="{'invisible': [('is_cat_length','=',False)],
+                               'required': [('is_cat_length','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="cat_id" string="ID"
+                               attrs="{'invisible': [('is_cat_id','=',False)],
+                               'required': [('is_cat_id','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="od" string="OD"
+                               attrs="{'invisible': [('is_od','=',False)],
+                               'required': [('is_od','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="dash" string="Dash#"
+                               attrs="{'invisible': [('is_dash','=',False)],
+                               'required': [('is_dash','!=',False)]}"
+                               placeholder="-013"/>
+                        <field name="wire_diameter"
+                               string="Wire Diameter"
+                               attrs="{'invisible': [('is_wire_diameter','=',False)],
+                               'required': [('is_wire_diameter','!=',False)]}"/>
+                        <field name="free_length"
+                               string="Free Length"
+                               attrs="{'invisible': [('is_free_length','=',False)],
+                               'required': [('is_free_length','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="brand" string="Brand"
+                               attrs="{'invisible': [('is_brand','=',False)],
+                               'required': [('is_brand','!=',False)]}"
+                               placeholder="Samtec, TE Connectivity"/>
+                        <field name="resistance"
+                               string="Resistance"
+                               attrs="{'invisible': [('is_resistance','=',False)],
+                               'required': [('is_resistance','!=',False)]}"
+                               placeholder="5, 3k"/>
+                        <field name="size" string="Size"
+                               attrs="{'invisible': [('is_size','=',False)],
+                               'required': [('is_size','!=',False)]}"
+                               placeholder="0603, 0.02inx0.03in, 1mmx3mm"/>
+                        <field name="capacitance"
+                               string="Capacitance"
+                               attrs="{'invisible': [('is_capacitance','=',False)],
+                               'required': [('is_capacitance','!=',False)]}"
+                               placeholder="20pF, 0.016uF"/>
+                        <field name="turn_ratio"
+                               string="Turn Ratio"
+                               attrs="{'invisible': [('is_turn_ratio','=',False)],
+                               'required': [('is_turn_ratio','!=',False)]}"
+                               placeholder="11.5:1"/>
+                        <field name="inductance"
+                               string="Inductance"
+                               attrs="{'invisible': [('is_inductance','=',False)],
+                               'required': [('is_inductance','!=',False)]}"
+                               placeholder="100uH, 470nH"/>
+                        <field name="cat_type"
+                               string='Semiconductors Type'
+                               attrs="{'invisible': [('is_cat_type','=',False)],
+                               'required': [('is_cat_type','!=',False)]}"/>
+                        <field name="cat_type_solder"
+                               string='Solder Type'
+                               attrs="{'invisible': [('is_cat_solder','=',False)],
+                               'required': [('is_cat_solder','!=',False)]}"/>
+                        <field name="cat_3dprint"
+                               string='3D Print Type'
+                               attrs="{'invisible': [('is_cat_3dprint','=',False)],
+                               'required': [('is_cat_3dprint','!=',False)]}"/>
+                        <field name="signals" string="Signals"
+                               attrs="{'invisible': [('is_signals','=',False)],
+                               'required': [('is_signals','!=',False)]}"
+                               placeholder="10"/>
+                        <field name="gauge" string="Gauge"
+                               attrs="{'invisible': [('is_gauge','=',False)],
+                               'required': [('is_gauge','!=',False)]}"
+                               placeholder="310, 8, 16"/>
+                        <field name="coating" string="Coating"
+                               attrs="{'invisible': [('is_coating','=',False)],
+                               'required': [('is_coating','!=',False)]}"
+                               placeholder="AR 795nm, ALD"/>
+                        <field name="focal_length"
+                               string="Focal Length"
+                               attrs="{'invisible': [('is_focal_length','=',False)],
+                               'required': [('is_focal_length','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="polarization"
+                               string="Polarization"
+                               attrs="{'invisible': [('is_polarization','=',False)],
+                               'required': [('is_polarization','!=',False)]}"
+                               placeholder="Aligned, 15 deg"/>
+                        <field name="thickness" string="Thickness"
+                               attrs="{'invisible': [('is_thickness','=',False)],
+                               'required': [('is_thickness','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="width" string="Width"
+                               attrs="{'invisible': [('is_width','=',False)],
+                               'required': [('is_width','!=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                    </group>
+                    <group string="Optional Fields">
+                        <field name="magnetism" string='Magnetism'
+                               attrs="{'invisible': [('is_magnetism','=',False)]}"/>
+                        <field name="compressed_length"
+                               string="Compressed Length"
+                               attrs="{'invisible': [('is_compressed_length','=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="press_slip"
+                               string="Press/slip"
+                               attrs="{'invisible': [('is_press_slip','=',False)]}"/>
+                        <field name="pins" string="# PINS"
+                               attrs="{'invisible': [('is_pins','=',False)]}" placeholder="10"/>
+                        <field name="finish" string="Finish"
+                               attrs="{'invisible': [('is_finish','=',False)]}"
+                               placeholder="Hard Anodized, RA 25"/>
+                        <field name="kernel_weight"
+                               string="Weight"
+                               attrs="{'invisible': [('is_weight','=',False)]}"
+                               placeholder="2lbs, 35g"/>
+                        <field name="brand_opt" string='Brand'
+                               attrs="{'invisible': [('is_brand_opt','=',False)]}"
+                               placeholder="Samtec, TE Connectivity"/>
+                        <field name="warranty" string='Warranty'
+                               attrs="{'invisible': [('is_warranty','=',False)]}"/>
+                        <field name="pdp_url"
+                               string="Product Data Page (URL)"
+                               attrs="{'invisible': [('is_pdp_url','=',False)]}"/>
+                        <field name="mac_address"
+                               string="MAC Address"
+                               attrs="{'invisible': [('is_mac_address','=',False)]}"
+                               placeholder="10.0.12.29"/>
+                        <field name="mac_bluetooth"
+                               string="Bluetooth MAC"
+                               attrs="{'invisible': [('is_mac_bluetooth','=',False)]}"
+                               placeholder="00:11:22:33:FF:EE"/>
+                        <field name="disk_space"
+                               string='Disk Space'
+                               attrs="{'invisible': [('is_disk_space','=',False)]}"/>
+                        <field name="memory" string='Memory'
+                               attrs="{'invisible': [('is_memory','=',False)]}"/>
+                        <field name="processor" string='Processor'
+                               attrs="{'invisible': [('is_processor','=',False)]}"/>
+                        <field name="cpu_speed" string="CPU Speed"
+                               attrs="{'invisible': [('is_cpu_speed','=',False)]}"
+                               placeholder="1.8GHz"/>
+                        <field name="opt_cat_id" string='ID'
+                               attrs="{'invisible': [('is_opt_cat_id','=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                        <field name="opt_od" string="OD"
+                               attrs="{'invisible': [('is_opt_od','=',False)]}"
+                               placeholder="1/2in, 5mm"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_title')]/div[@name='options']/div[1]"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='general_information']/group/group[@name='group_standard_price']/label[@for='list_price']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='general_information']/group/group[@name='group_standard_price']/div[@name='pricing']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='general_information']/group/group[@name='group_standard_price']/label[@for='standard_price']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//page[@name='general_information']/group/group[@name='group_standard_price']/div[@name='standard_price_uom']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_template_form_view_procurement_button_kernel" model="ir.ui.view">
+        <field name="name">product.template.procurement.button</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available']" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </xpath>
+            <xpath expr="//field[@name='virtual_available']" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_kanban_stock_view_inherit_kernel" model="ir.ui.view">
+        <field name="name">Product.template.product.kanban</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <field name="qty_available" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_stock_product_template_tree_inherit_kernel" model="ir.ui.view">
+        <field name="name">product.template.stock.tree.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
+        <field name="arch" type="xml">
+            <field name="qty_available" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </field>
+            <field name="virtual_available" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_product_form_view_procurement_button_kernel" model="ir.ui.view">
+        <field name="name">product.product.procurement.button</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available']" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </xpath>
+            <xpath expr="//field[@name='virtual_available']" position="attributes">
+                <attribute name="widget">integer</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_normal_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">product.normal.form.inherit.kernel</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='image_1920']" position="replace">
+                <field name="image_1920" widget="image" class="oe_avatar" width="300" height="300"/>
+            </xpath>
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">SKU</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='barcode']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="manufacturer"/>
+            </xpath>
+            <label for="lst_price" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </label>
+            <xpath expr="//form" position="attributes">
+                <attribute name="duplicate">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_template_tree_kernel" model="ir.ui.view">
+        <field name="name">product.template.tree.kernel</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">SKU</attribute>
+            </xpath>
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field name="user_archived_id" string="User Archived" optional="hide"/>
+                <field name="date_archived" string="Date Archived" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_tree_kernel" model="ir.ui.view">
+        <field name="name">product.product.tree.kernel</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">Mfr SKU</attribute>
+            </xpath>
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field name="user_archived_id" string="User Archived" optional="hide"/>
+                <field name="date_archived" string="Date Archived" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_only_form_view_inherit_kernel" model="ir.ui.view">
+        <field name="name">product.template.only.form.view.inherit.kernel</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='image_1920']" position="replace">
+                <field name="image_1920" widget="image" class="oe_avatar" width="300" height="300"/>
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">SKU</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='barcode']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="manufacturer"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_product_template_form_view_inherit_kernel" model="ir.ui.view">
+        <field name="name">account.product.template.form.view.inherit.kernel</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="account.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='invoicing']/group[@name='accounting']" position="before">
+                <group name="sale_price">
+                    <group>
+                        <label for="list_price"/>
+                        <div name="pricing">
+                            <field name="list_price"
+                                   class="oe_inline" widget='monetary'
+                                   options="{'currency_field': 'currency_id',
+                                   'field_digits': True}"/>
+                            <button name="open_pricelist_rules"
+                                    icon="fa-arrow-right" type="object"
+                                    groups="product.group_product_pricelist"
+                                    class="oe_inline">
+                                <field name="pricelist_item_count"
+                                       attrs="{'invisible': [('pricelist_item_count', '=', 0)]}"/>
+                                <span attrs="{'invisible': [('pricelist_item_count', '=', 1)]}">
+                                    Extra Prices
+                                </span>
+                                <span attrs="{'invisible': [('pricelist_item_count', '!=', 1)]}">
+                                    Extra Price
+                                </span>
+                            </button>
+                        </div>
+                        <field name="taxes_id"
+                               widget="many2many_tags"
+                               context="{'default_type_tax_use':'sale'}"/>
+                        <field name="supplier_taxes_id"
+                               widget="many2many_tags"
+                               context="{'default_type_tax_use':'purchase'}"/>
+                    </group>
+                    <group>
+                        <label for="standard_price"
+                               string="Accounting Cost"
+                               groups="base.group_user"
+                               attrs="{'invisible': [('product_variant_count', '&gt;', 1),
+                               ('is_product_variant', '=', False)]}"/>
+                        <div name="standard_price_uom"
+                             groups="base.group_user"
+                             attrs="{'invisible': [('product_variant_count', '&gt;', 1),
+                             ('is_product_variant', '=', False)]}"
+                             class="o_row">
+                            <field name="standard_price"
+                                   widget='monetary'
+                                   options="{'currency_field': 'cost_currency_id'}"/>
+                            <span groups="uom.group_uom"
+                                  class="oe_read_only">
+                                per
+                                <field name="uom_name"/>
+                            </span>
+                            <span name="update_cost_price">
+                                <button string="Update Cost"
+                                        type="action"
+                                        name="%(stock_account.action_view_change_standard_price)d"
+                                        attrs="{'invisible':['|', ('cost_method', '=', 'fifo'),
+                                        ('product_variant_count', '>', 1)]}"
+                                        class="oe_link pt-0 oe_inline"/>
+                            </span>
+                        </div>
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='taxes_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='supplier_taxes_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="model_product_template_action_share" model="ir.actions.server">
+        <field name="name">Set Quantity Zero</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = records.set_quantity_zero()</field>
+        <field name="groups_id" eval="[(4,ref('product_extension.group_set_quantity_zero'))]"/>
+    </record>
+</odoo>

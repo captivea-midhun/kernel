@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Server action to update EEOL field -->
+<data noupdate="0">
+    <record id="action_server_update_eeol" model="ir.actions.server">
+        <field name="name">Update EEOL</field>
+        <field name="model_id" ref="asset_equipment.model_maintenance_equipment"/>
+        <field name="state">code</field>
+        <field name="code">
+            for rec in records:
+                action = rec.update_expected_end()
+        </field>
+    </record>
+</data>

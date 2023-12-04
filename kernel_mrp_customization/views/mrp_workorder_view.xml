@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mrp_workorder_view_form_tablet_inherit_kernel" model="ir.ui.view">
+        <field name="name">mrp.workorder.view.form.inherit.quality.tablet.new</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp_workorder.mrp_workorder_view_form_tablet"/>
+        <field name="arch" type="xml">
+            <xpath expr="div[hasclass('o_workorder_data')]//div[hasclass('o_workorder_bar_content')]//div[2]//div[hasclass('o_workorder_lot')]/field[@name='lot_id']"
+                   position="attributes">
+                <attribute name="context">{'default_product_id': component_id,
+                    'component_product_id': component_id,'default_company_id': company_id,
+                    'active_mo_id': test_type == 'register_consumed_materials' and production_id or
+                    False, 'workorder_id':active_id}
+                </attribute>
+            </xpath>
+            <xpath expr="div[hasclass('workorder_bar')]//div[hasclass('workorder_bar_center')]//div//field[@name='finished_lot_id']"
+                   position="attributes">
+                <attribute name="context">{'default_product_id': product_id, 'default_company_id':
+                    company_id, 'workorder_id':active_id, 'finish_product': True,
+                    'finish_product_id': product_id}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_mrp_product_produce_wizard_inherit_kernel" model="ir.ui.view">
+        <field name="name">MRP Product Produce</field>
+        <field name="model">mrp.product.produce</field>
+        <field name="inherit_id" ref="mrp.view_mrp_product_produce_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group/div/field[@name='finished_lot_id']" position="attributes">
+                <attribute name="context">{'default_product_id': product_id,
+                    'default_company_id': company_id, 'finish_product': True,
+                    'finish_product_id': product_id}
+                </attribute>
+            </xpath>
+            <xpath expr="//group/field[@name='raw_workorder_line_ids']/tree/field[@name='lot_id']"
+                   position="attributes">
+                <attribute name="context">{'default_product_id': product_id,
+                    'active_mo_id': parent.production_id, 'default_company_id': company_id,
+                    'component_product_id': product_id}
+                </attribute>
+            </xpath>
+            <xpath expr="//group/field[@name='finished_workorder_line_ids']/tree/field[@name='lot_id']"
+                   position="attributes">
+                <attribute name="context">{'default_product_id': product_id,
+                    'default_company_id': company_id,'finish_product': True,
+                    'finish_product_id': product_id}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

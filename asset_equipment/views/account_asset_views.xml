@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_asset_equipment_form">
+        <field name="name">account.asset.equipment.form</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="attributes">
+                <attribute name="attrs">{}</attribute>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Equipment" name="asset_equipment_one">
+                    <field name="asset_equipment_ids" widget="many2many">
+                        <tree>
+                            <field name="name"/>
+                            <field name="category_id"/>
+                            <field name="company_id" optional="show"/>
+                            <field name="department_id" optional="show"/>
+                            <field name="technician_user_id" optional="show"/>
+                            <field name="assign_date" optional="show"/>
+                            <field name="maintenance_team_id" optional="show"/>
+                            <field name="equipment_assign_to" optional="show"/>
+                            <field name="employee_id" optional="show"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_account_asset_equipment_search">
+        <field name="name">account.asset.equipment.search</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/filter[@name='closed']" position="before">
+                <filter string="No Equipment" name="no_equipment"
+                        domain="[('asset_equipment_ids','=', False)]"
+                        help="Assets have No Equipments Link"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_property_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">view.partner.property.form.inherit.kernel</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="supplier_rank" invisible="True"/>
+            </field>
+            <group name="fiscal_information" position="attributes">
+                <attribute name="attrs">{'invisible':
+                    [('supplier_rank', '!=', 0)]}
+                </attribute>
+            </group>
+        </field>
+    </record>
+</odoo>

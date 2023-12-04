@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="maintenance_equip_template_document">
+        <t t-call="web.internal_layout">
+            <div class="page">
+                <div class="text-center">
+                    <b>Maintenance Equipment</b>
+                </div>
+                <br/>
+                <table class="table table-condensed" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Expected End of Life</th>
+                            <th>Next Prevent Maintenance</th>
+                            <th>Asset ID</th>
+                            <th>Equipment Name</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Purchase Date</th>
+                            <th class="text-right">Equip Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="equip_cost_total" t-value="0.00"/>
+                        <tr t-foreach="docs" t-as="doc">
+                            <td>
+                                <span t-esc="doc.expected_end_of_life"/>
+                            </td>
+                            <td>
+                                <span t-esc="doc.next_action_date"/>
+                            </td>
+                            <td>
+                                <span t-esc="doc.asset_tag_id"/>
+                            </td>
+                            <td width="30%">
+                                <span t-esc="doc.name"/>
+                            </td>
+                            <td>
+                                <span t-esc="doc.equipment_brand"/>
+                            </td>
+                            <td>
+                                <span t-esc="doc.model"/>
+                            </td>
+                            <td>
+                                <span t-esc="doc.purchase_date"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="doc.cost"
+                                      t-options='{"widget": "monetary",
+                                      "display_currency": doc.currency_id}'/>
+                                <t t-set="equip_cost_total"
+                                   t-value="equip_cost_total + doc.cost"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="7">
+                                <span>
+                                    <b>Total</b>
+                                </span>
+                            </td>
+                            <td class="text-right">
+                                <b>
+                                    <span t-esc="equip_cost_total"
+                                          t-options='{"widget": "monetary",
+                                          "display_currency":
+                                          docs.env.user.company_id.currency_id}'/>
+                                </b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="maintenance_equip_template">
+        <t t-call="web.html_container">
+            <t t-call="asset_maintenance_report.maintenance_equip_template_document"/>
+        </t>
+    </template>
+
+</odoo>

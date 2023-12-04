@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Kernel Product Categories. -->
+    <record id="product.product_category_all" model="product.category">
+        <field name="name">COTS</field>
+        <field name="is_magnetism">True</field>
+    </record>
+    <record id="product_category_hardware" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Hardware</field>
+        <field name="is_material">True</field>
+    </record>
+    <record id="product_category_threaded" model="product.category">
+        <field name="parent_id" ref="product_category_hardware"/>
+        <field name="name">Threaded</field>
+        <field name="is_thread_size">True</field>
+        <field name="is_cat_length">True</field>
+    </record>
+    <record id="product_category_orings" model="product.category">
+        <field name="parent_id" ref="product_category_hardware"/>
+        <field name="name">Orings</field>
+        <field name="is_opt_cat_id">True</field>
+        <field name="is_opt_od">True</field>
+        <field name="is_dash">True</field>
+    </record>
+    <record id="product_category_springs" model="product.category">
+        <field name="parent_id" ref="product_category_hardware"/>
+        <field name="name">Springs</field>
+        <field name="is_od">True</field>
+        <field name="is_wire_diameter">True</field>
+        <field name="is_free_length">True</field>
+        <field name="is_compressed_length">True</field>
+    </record>
+    <record id="product_category_rivets" model="product.category">
+        <field name="parent_id" ref="product_category_hardware"/>
+        <field name="name">Rivets</field>
+        <field name="is_od">True</field>
+        <field name="is_cat_length">True</field>
+    </record>
+    <record id="product_category_pins" model="product.category">
+        <field name="parent_id" ref="product_category_hardware"/>
+        <field name="name">Pins</field>
+        <field name="is_od">True</field>
+        <field name="is_cat_length">True</field>
+        <field name="is_press_slip">True</field>
+    </record>
+    <record id="product_category_misc" model="product.category">
+        <field name="parent_id" ref="product_category_hardware"/>
+        <field name="name">Misc</field>
+    </record>
+    <record id="product_category_electronics" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Electronics</field>
+        <field name="is_brand">True</field>
+    </record>
+    <record id="product_category_resistors" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Resistors</field>
+        <field name="is_resistance">True</field>
+        <field name="is_size">True</field>
+    </record>
+    <record id="product_category_capacitors" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Capacitors</field>
+        <field name="is_capacitance">True</field>
+        <field name="is_size">True</field>
+    </record>
+    <record id="product_category_transformers" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Transformers</field>
+        <field name="is_turn_ratio">True</field>
+        <field name="is_size">True</field>
+    </record>
+    <record id="product_category_inductors" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Inductors</field>
+        <field name="is_inductance">True</field>
+        <field name="is_size">True</field>
+    </record>
+    <record id="product_category_semiconductors" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Semiconductors</field>
+        <field name="is_cat_type">True</field>
+        <field name="is_size">True</field>
+        <field name="is_pins">True</field>
+    </record>
+    <record id="product_category_connectors_adapters" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Connectors-Adapters</field>
+    </record>
+    <record id="product_category_cables" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Cables</field>
+        <field name="is_cat_length">True</field>
+        <field name="is_signals">True</field>
+    </record>
+    <record id="product_category_solder" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Solder</field>
+        <field name="is_cat_solder">True</field>
+    </record>
+    <record id="product_category_sleeving" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Sleeving</field>
+    </record>
+    <record id="product_category_wire" model="product.category">
+        <field name="parent_id" ref="product_category_electronics"/>
+        <field name="name">Wire</field>
+        <field name="is_gauge">True</field>
+    </record>
+    <record id="product_category_optics" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Optics</field>
+        <field name="is_material">True</field>
+        <field name="is_coating">True</field>
+    </record>
+    <record id="product_category_lenses" model="product.category">
+        <field name="parent_id" ref="product_category_optics"/>
+        <field name="name">Lenses</field>
+        <field name="is_od">True</field>
+        <field name="is_focal_length">True</field>
+    </record>
+    <record id="product_category_polarizers" model="product.category">
+        <field name="parent_id" ref="product_category_optics"/>
+        <field name="name">Polarizers</field>
+        <field name="is_polarization">True</field>
+    </record>
+    <record id="product_category_prisms" model="product.category">
+        <field name="parent_id" ref="product_category_optics"/>
+        <field name="name">Prisms</field>
+    </record>
+    <record id="product_category_mirrors" model="product.category">
+        <field name="parent_id" ref="product_category_optics"/>
+        <field name="name">Mirrors</field>
+    </record>
+    <record id="product_category_beam_splitters" model="product.category">
+        <field name="parent_id" ref="product_category_optics"/>
+        <field name="name">Beam Splitters</field>
+        <field name="is_polarization">True</field>
+    </record>
+    <record id="product_category_raw_stock" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Raw Stock</field>
+        <field name="is_material">True</field>
+    </record>
+    <record id="product_category_plate" model="product.category">
+        <field name="parent_id" ref="product_category_raw_stock"/>
+        <field name="name">Plate</field>
+        <field name="is_thickness">True</field>
+        <field name="is_cat_length">True</field>
+        <field name="is_width">True</field>
+    </record>
+    <record id="product_category_rod" model="product.category">
+        <field name="parent_id" ref="product_category_raw_stock"/>
+        <field name="name">Rod</field>
+        <field name="is_od">True</field>
+        <field name="is_cat_length">True</field>
+    </record>
+    <record id="product_category_tube" model="product.category">
+        <field name="parent_id" ref="product_category_raw_stock"/>
+        <field name="name">Tube</field>
+        <field name="is_cat_id">True</field>
+        <field name="is_od">True</field>
+        <field name="is_cat_length">True</field>
+    </record>
+    <record id="product_category_foam" model="product.category">
+        <field name="parent_id" ref="product_category_raw_stock"/>
+        <field name="name">Foam</field>
+        <field name="is_thickness">True</field>
+        <field name="is_width">True</field>
+        <field name="is_cat_length">True</field>
+    </record>
+    <record id="product_category_3d_print" model="product.category">
+        <field name="parent_id" ref="product_category_raw_stock"/>
+        <field name="name">3D Print</field>
+        <field name="is_cat_3dprint">True</field>
+    </record>
+    <record id="product_category_chemical" model="product.category">
+        <field name="parent_id" ref="product.product_category_all"/>
+        <field name="name">Chemical</field>
+    </record>
+    <record id="product_category_adhesive" model="product.category">
+        <field name="parent_id" ref="product_category_chemical"/>
+        <field name="name">Adhesive</field>
+    </record>
+    <record id="product_category_solvent" model="product.category">
+        <field name="parent_id" ref="product_category_chemical"/>
+        <field name="name">Solvent</field>
+    </record>
+    <record id="product_category_meg" model="product.category">
+        <field name="name">MEG</field>
+        <field name="is_magnetism">True</field>
+    </record>
+    <record id="product_category_outsourced" model="product.category">
+        <field name="parent_id" ref="product_category_meg"/>
+        <field name="name">Outsourced</field>
+    </record>
+    <record id="product_category_mechanical" model="product.category">
+        <field name="parent_id" ref="product_category_outsourced"/>
+        <field name="name">Mechanical</field>
+        <field name="is_material">True</field>
+        <field name="is_finish">True</field>
+        <field name="is_weight">True</field>
+    </record>
+    <record id="product_category_electrical" model="product.category">
+        <field name="parent_id" ref="product_category_outsourced"/>
+        <field name="name">Electrical</field>
+    </record>
+    <record id="product_category_products" model="product.category">
+        <field name="parent_id" ref="product_category_meg"/>
+        <field name="name">Products</field>
+    </record>
+    <record id="product_category_sub_assemblies" model="product.category">
+        <field name="parent_id" ref="product_category_meg"/>
+        <field name="name">Sub-Assemblies</field>
+    </record>
+    <record id="product_category_spad" model="product.category">
+        <field name="name">SPAD</field>
+    </record>
+    <record id="product_category_spad_outsourced" model="product.category">
+        <field name="parent_id" ref="product_category_spad"/>
+        <field name="name">Outsourced</field>
+    </record>
+    <record id="product_category_spad_mechanical" model="product.category">
+        <field name="parent_id" ref="product_category_spad_outsourced"/>
+        <field name="name">Mechanical</field>
+        <field name="is_material">True</field>
+        <field name="is_finish">True</field>
+        <field name="is_weight">True</field>
+    </record>
+    <record id="product_category_spad_electrical" model="product.category">
+        <field name="parent_id" ref="product_category_spad_outsourced"/>
+        <field name="name">Electrical</field>
+    </record>
+    <record id="product_category_spad_products" model="product.category">
+        <field name="parent_id" ref="product_category_spad"/>
+        <field name="name">Products</field>
+    </record>
+    <record id="product_category_spad_sub_assemblies" model="product.category">
+        <field name="parent_id" ref="product_category_spad"/>
+        <field name="name">Sub-Assemblies</field>
+    </record>
+    <record id="product_category_assets" model="product.category">
+        <field name="name">Assets</field>
+        <field name="is_barcode">True</field>
+        <field name="is_warranty">True</field>
+        <field name="is_pdp_url">True</field>
+        <field name="is_brand_opt">True</field>
+    </record>
+    <record id="product_category_instruments" model="product.category">
+        <field name="parent_id" ref="product_category_assets"/>
+        <field name="name">Instruments</field>
+        <field name="is_mac_address">True</field>
+    </record>
+    <record id="product_category_equipment" model="product.category">
+        <field name="parent_id" ref="product_category_assets"/>
+        <field name="name">Equipment</field>
+    </record>
+    <record id="product_category_it" model="product.category">
+        <field name="parent_id" ref="product_category_assets"/>
+        <field name="name">IT</field>
+        <field name="is_mac_address">True</field>
+    </record>
+    <record id="product_category_av_equipment" model="product.category">
+        <field name="parent_id" ref="product_category_it"/>
+        <field name="name">A/V Equipment</field>
+    </record>
+    <record id="product_category_printers" model="product.category">
+        <field name="parent_id" ref="product_category_it"/>
+        <field name="name">Printers</field>
+    </record>
+    <record id="product_category_network_equipment" model="product.category">
+        <field name="parent_id" ref="product_category_it"/>
+        <field name="name">Network Equipment</field>
+    </record>
+    <record id="product_category_computers" model="product.category">
+        <field name="parent_id" ref="product_category_assets"/>
+        <field name="name">Computers</field>
+        <field name="is_mac_bluetooth">True</field>
+        <field name="is_disk_space">True</field>
+        <field name="is_memory">True</field>
+        <field name="is_processor">True</field>
+        <field name="is_cpu_speed">True</field>
+    </record>
+    <record id="product_category_appliances" model="product.category">
+        <field name="parent_id" ref="product_category_assets"/>
+        <field name="name">Appliances</field>
+    </record>
+    <record id="product_category_office_supplies" model="product.category">
+        <field name="name">Office Supplies</field>
+    </record>
+    <record id="product_category_misc_1" model="product.category">
+        <field name="name">Misc</field>
+    </record>
+    <record id="product_category_tech_supplies" model="product.category">
+        <field name="name">Tech Supplies</field>
+    </record>
+    <record id="product_category_hand_tools" model="product.category">
+        <field name="name">Hand Tools</field>
+    </record>
+    <record id="product_category_furnishings" model="product.category">
+        <field name="name">Furnishings</field>
+    </record>
+    <record id="product_category_services" model="product.category">
+        <field name="name">Services?</field>
+    </record>
+</odoo>

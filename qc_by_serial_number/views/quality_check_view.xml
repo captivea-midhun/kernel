@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Quality Check Inherited Form View -->
+    <record id="quality_check_view_form_kernal_inherit" model="ir.ui.view">
+        <field name="name">quality.check.view.form.kernal.inherit</field>
+        <field name="model">quality.check</field>
+        <field name="inherit_id" ref="quality_control.quality_check_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="purchase_line_id" invisible="1"/>
+                <field name="qty" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="comments" string="Comments">
+                    <field name="comments"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

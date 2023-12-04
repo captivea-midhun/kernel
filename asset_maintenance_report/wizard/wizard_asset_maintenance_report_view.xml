@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_asset_maintenance_report_view" model="ir.ui.view">
+        <field name="name">Accounting Asset Report</field>
+        <field name="model">wizard.asset.maintenance.report</field>
+        <field name="arch" type="xml">
+            <form string="Accounting Asset Report">
+                <group>
+                    <group>
+                        <field name="equipment_status" required="1"/>
+                    </group>
+                    <group>
+                        <field name="asset_model_ids"
+                               attrs="{'invisible': [('equipment_status', '=','unassigned')]}"
+                               widget="many2many_tags"
+                               domain="[('asset_type', '=', 'purchase'), ('state', '=', 'model')]"/>
+                        <field name="starting_point"
+                               attrs="{'invisible': [('equipment_status', 'in',('unassigned','both'))],
+                            'required': [('equipment_status', 'not in',('unassigned','both'))]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_report"
+                            string="Print Excel" type="object"
+                            class="oe_highlight"
+                            context="{'excel_report': True}"/>
+                    <button name="action_print_report"
+                            string="Print PDF" type="object"
+                            class="oe_highlight"/>
+                    <button string="Cancel"
+                            class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_asset_maintenance_report" model="ir.actions.act_window">
+        <field name="name">Accounting Asset Report</field>
+        <field name="res_model">wizard.asset.maintenance.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_asset_maintenance_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_wizard_asset_maintenance_report"
+              name="Accounting Asset Report"
+              action="action_wizard_asset_maintenance_report"
+              parent="maintenance.maintenance_reporting"/>
+
+</odoo>

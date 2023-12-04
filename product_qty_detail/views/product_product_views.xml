@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- From View Inherited of procurements button -->
+        <record model="ir.ui.view" id="product_product_form_view_procurement_button_inherit">
+            <field name="name">product.template_procurement</field>
+            <field name="model">product.product</field>
+            <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <button name="action_product_forecast_report" position="after">
+                    <button type="object"
+                            name="action_product_tmpl_detailed_qty"
+                            attrs="{'invisible':[('type', '!=', 'product')]}"
+                            class="oe_stat_button" icon="fa-cubes">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="net_on_hand_qty" widget="statinfo" nolabel="1"
+                                       class="mr4"/>
+                                <field name="uom_name"/>
+                            </span>
+                            <span class="o_stat_text">Net On Hand</span>
+                        </div>
+                    </button>
+                </button>
+                <button name="action_product_forecast_report" position="attributes">
+                    <attribute name="groups">product_qty_detail.forecast_button_access</attribute>
+                </button>
+            </field>
+        </record>
+    </data>
+</odoo>

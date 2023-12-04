@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- cron to approve purchase order where total amount is less than $100 -->
+    <record forcecreate="True" id="ir_cron_approve_purchase_order" model="ir.cron">
+        <field name="name">Approval Purchase Order</field>
+        <field name="model_id" ref="model_purchase_order"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_approve_purchase_order()</field>
+    </record>
+</odoo>

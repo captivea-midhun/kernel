@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="coa_kernel_company" model="account.chart.template">
+        <field name="name">Chart of Accounts(Kernel)</field>
+        <field name="bank_account_code_prefix">1</field>
+        <field name="cash_account_code_prefix">1</field>
+        <field name="transfer_account_code_prefix">1</field>
+        <field name="code_digits">6</field>
+        <field name="currency_id" ref="base.USD"/>
+    </record>
+</odoo>

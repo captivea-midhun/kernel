@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherited Stock Location view -->
+    <record id="view_stock_location_inherited" model="ir.ui.view">
+        <field name="name">stock.location.form</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <field name="comment" position="after">
+                <notebook>
+                    <page string="Current Stock">
+                        <field name="positive_stock_quant_ids"/>
+                    </page>
+                    <page string="Negative Stock">
+                        <field name="negative_stock_quant_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_stock_location_tree_inherited" model="ir.ui.view">
+        <field name="name">stock.location.tree.view</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2"/>
+        <field name="arch" type="xml">
+            <field name="complete_name" position="after">
+                <field name="product_category_ids" widget="many2many_tags" optional="hide"/>
+                <field name="product_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+        </field>
+    </record>
+</odoo>

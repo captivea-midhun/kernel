@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_mrp_product_produce_line_form_view_inherit" model="ir.ui.view">
+            <field name="name">MRP Product Produce change Form Inherit</field>
+            <field name="model">mrp.product.produce</field>
+            <field name="inherit_id" ref="mrp.view_mrp_product_produce_wizard"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='raw_workorder_line_ids']/tree/field[@name='lot_id']"
+                       position="after">
+                    <field name="slot" readonly="1" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_product_category_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.category.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock.product_category_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <field name="route_ids" position="after">
+                <field name="categ_receive_route_id"
+                       domain="[('product_categ_selectable', '=',True)]"/>
+            </field>
+        </field>
+    </record>
+</odoo>

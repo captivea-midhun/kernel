@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_delivery_courier_tree_view" model="ir.ui.view">
+        <field name="name">purchase.delivery.courier.form.view</field>
+        <field name="model">purchase.delivery.courier</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery Courier" editable="top">
+                <field name="name" width="70%"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="purchase_delivery_courier_action" model="ir.actions.act_window">
+        <field name="name">Couriers</field>
+        <field name="res_model">purchase.delivery.courier</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="purchase_delivery_courier_tree_view"/>
+    </record>
+
+    <menuitem id="menu_purchase_delivery_courier"
+              name="Couriers" parent="purchase.menu_purchase_config"
+              groups="purchase.group_purchase_manager"
+              action="purchase_rfo.purchase_delivery_courier_action" sequence="2"/>
+</odoo>

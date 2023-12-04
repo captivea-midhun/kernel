@@ -1,0 +1,101 @@
+id,code,name,user_type_id/id,chart_template_id/id,reconcile
+kernel_acc_0,105,Citi Checking Account,account.data_account_type_liquidity,coa_kernel_company,FALSE
+kernel_acc_1,110,American Express Plum Card,account.data_account_type_liquidity,coa_kernel_company,FALSE
+kernel_acc_2,120,Accounts Receivable,account.data_account_type_receivable,coa_kernel_company,TRUE
+kernel_acc_3,130,Prepayments,account.data_account_type_current_assets,coa_kernel_company,FALSE
+kernel_acc_4,135,Due to/Due from,account.data_account_type_current_assets,coa_kernel_company,FALSE
+kernel_acc_5,137,Other current assets,account.data_account_type_current_assets,coa_kernel_company,FALSE
+kernel_acc_6,140,Inventory,account.data_account_type_current_assets,coa_kernel_company,TRUE
+kernel_acc_7,150,Office Equipment,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_8,155,Less Accumulated Depreciation on Office Equipment,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_9,160,Lab Equipment,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_10,165,Less Accumulated Depreciation on Lab Equipment,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_11,170,Airplane,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_12,175,Less Accumulated Depreciation on Airplane,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_13,180,Intangible Assets,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_14,185,Less Accumulated Amortization on Intangible Assets,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_15,190,Furniture,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_16,195,Less Accumulated Depreciation on Furniture,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_17,200,IP,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_18,205,Less Accumulated Amortization on IP,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_19,210,Leasehold Improvements,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_20,215,Less Accumulated Amortization on Leasehold Improvements,account.data_account_type_fixed_assets,coa_kernel_company,FALSE
+kernel_acc_21,220,Note Receivable - Bryan Johnson,account.data_account_type_non_current_assets,coa_kernel_company,FALSE
+kernel_acc_22,225,"Note Receivable - HAOS Holding, LLC",account.data_account_type_non_current_assets,coa_kernel_company,FALSE
+kernel_acc_23,230,Other Long-Term Assets,account.data_account_type_non_current_assets,coa_kernel_company,FALSE
+kernel_acc_24,250,Accounts Payable,account.data_account_type_payable,coa_kernel_company,TRUE
+kernel_acc_25,255,Other Current Liabilities,account.data_account_type_current_liabilities,coa_kernel_company,FALSE
+kernel_acc_26,260,Accrued Expenses,account.data_account_type_current_liabilities,coa_kernel_company,FALSE
+kernel_acc_27,265,Payroll Wages Payable,account.data_account_type_current_liabilities,coa_kernel_company,FALSE
+kernel_acc_28,270,Suspense,account.data_account_type_current_liabilities,coa_kernel_company,FALSE
+kernel_acc_29,275,Note Payable - Bryan Johnson,account.data_account_type_current_liabilities,coa_kernel_company,FALSE
+kernel_acc_30,300,Retained Earnings,account.data_account_type_equity,coa_kernel_company,FALSE
+kernel_acc_31,305,Common Stock,account.data_account_type_equity,coa_kernel_company,FALSE
+kernel_acc_32,310,Option Compensation,account.data_account_type_equity,coa_kernel_company,FALSE
+kernel_acc_33,400,Sales,account.data_account_type_revenue,coa_kernel_company,FALSE
+kernel_acc_34,450,Other Income,account.data_account_type_revenue,coa_kernel_company,FALSE
+kernel_acc_35,470,Interest Income,account.data_account_type_revenue,coa_kernel_company,FALSE
+kernel_acc_36,480,Gain or Loss from Sale of Assets,account.data_account_type_other_income,coa_kernel_company,FALSE
+kernel_acc_37,500,Cost of Goods Sold,account.data_account_type_direct_costs,coa_kernel_company,FALSE
+kernel_acc_38,505,Public Relations and Marketing,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_39,510,Conferences and Memberships,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_40,515,General Lab Equipment,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_41,520,Fire,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_42,525,Flow,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_43,530,Insurance - Research,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_44,535,Research Reports and Books,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_45,540,Software & Subscriptions - Research,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_46,545,Advisors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_47,550,Benefits - Administrative,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_48,555,Payroll Taxes - Administrative,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_49,560,Administrative - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_50,565,Administrative - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_51,570,Benefits - Operations,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_52,575,Payroll Taxes - Operations,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_53,580,Hardware Engineering - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_54,585,Hardware Engineering - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_55,590,Machine Learning - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_56,595,Machine Learning - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_57,600,Neuroscience - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_58,605,Neuroscience - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_59,610,Software Engineering - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_60,615,Software Engineering - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_61,620,Work Management - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_62,625,Work Management - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_63,630,Benefits - Marketing,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_64,635,Payroll Taxes - Marketing,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_65,640,Marketing - Contractors,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_66,645,Marketing - Employees,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_67,650,Computer Supplies,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_68,655,Hiring and recruiting,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_69,660,Insurance - Office,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_70,665,Office Supplies,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_71,670,Other Office Expenses,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_72,675,Other Taxes,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_73,680,Rent,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_74,685,Software and Subscriptions - Office,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_75,690,Telephone & Internet,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_76,695,Utilities,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_77,700,Donations,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_78,705,Training,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_79,710,Shipping Costs,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_80,715,Accounting,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_81,720,Legal Expenses,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_82,725,Other Professional Services,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_83,730,Airfare,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_84,735,Airplane Expenses,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_85,740,Hotel,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_86,745,Transportation Expense,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_87,750,Travel meals,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_88,755,Entertainment,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_89,760,Meals for events/meetings,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_90,765,Office food and drinks,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_91,770,Option Compensation Expense - Operations,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_92,775,Option Compensation Expense - Administrative,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_93,780,Bad Debts,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_94,785,Depreciation,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_95,790,Amortization,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_96,795,Income Tax Expense,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_97,800,Interest Expense,account.data_account_type_expenses,coa_kernel_company,FALSE
+kernel_acc_98,1401,Stock Received But Not Billed,account.data_account_type_current_assets,coa_kernel_company,TRUE
+kernel_acc_99,1402,Stock Delivered But Not Billed,account.data_account_type_current_assets,coa_kernel_company,TRUE

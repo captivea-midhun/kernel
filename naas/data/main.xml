@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="naas.experiment" id="KER2020_1">
+        <field name="name">KER2020.1</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_screening_oc">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">1. Screening</field>
+        <field name="name">1.01 Obtain Consent</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_screening_sq">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">1. Screening</field>
+        <field name="name">1.02 Screening Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_screening_el">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">1. Screening</field>
+        <field name="name">1.03 Eligible?</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_screening_nda">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">1. Screening</field>
+        <field name="name">1.04 NDA</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ic">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.01 Informed Consent</field>
+        <field name="task_type">attachment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_w9">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.02 W9</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_dq">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.03 Demographics Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_erb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.04 Empty Room (before)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_rs">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.05 Resting State</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_erf">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.06 ERF</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.07 NCPT Arithmetic Reasoning</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_dsc">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.08 NCPT Digit Symbol Coding</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_sb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.09 NCPT Scale Balance</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_gr">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.10 NCPT Grammatical Reasoning</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_ms">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.11 NCPT Memory Span</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_or">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.12 NCPT Object Recognition</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_rms">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.13 NCPT Reverse Memory Span</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_tma">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.14 NCPT Trail Making A</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_ncpt_tmb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.15 NCPT Trail Making B</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_era">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.16 Empty Room (after)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_s">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.17 Schedule Training Visits 1-5</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_baseline_pay">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">2. Baseline Visit</field>
+        <field name="name">2.18 Pay Subject</field>
+        <field name="task_type">payment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_s">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.01 Schedule</field>
+        <field name="task_type">event</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.02 Alertness Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_erb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.03 Empty Room (before)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_rs">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.04 Resting State</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_erf">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.05 ERF</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_cg">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.06 Complete Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_og">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.07 Observe Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_era">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.08 Empty Room (after)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_pay">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.09 Pay Subject</field>
+        <field name="task_type">payment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt1_notes">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">3. Brain Training 1</field>
+        <field name="name">3.10 Notes</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_s">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.01 Schedule</field>
+        <field name="task_type">event</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.02 Alertness Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_erb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.03 Empty Room (before)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_rs">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.04 Resting State</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_erf">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.05 ERF</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_cg">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.06 Complete Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_og">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.07 Observe Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_era">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.08 Empty Room (after)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_pay">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.09 Pay Subject</field>
+        <field name="task_type">payment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt2_notes">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">4. Brain Training 2</field>
+        <field name="name">4.10 Notes</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_s">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.01 Schedule</field>
+        <field name="task_type">event</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.02 Alertness Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_erb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.03 Empty Room (before)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_rs">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.04 Resting State</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_erf">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.05 ERF</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_cg">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.06 Complete Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_og">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.07 Observe Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_era">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.08 Empty Room (after)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_pay">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.09 Pay Subject</field>
+        <field name="task_type">payment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt3_notes">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">5. Brain Training 3</field>
+        <field name="name">5.10 Notes</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_s">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.01 Schedule</field>
+        <field name="task_type">event</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.02 Alertness Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_erb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.03 Empty Room (before)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_rs">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.04 Resting State</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_erf">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.05 ERF</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_cg">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.06 Complete Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_og">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.07 Observe Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_era">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.08 Empty Room (after)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_pay">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.09 Pay Subject</field>
+        <field name="task_type">payment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt4_notes">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">6. Brain Training 4</field>
+        <field name="name">6.10 Notes</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_s">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.01 Schedule</field>
+        <field name="task_type">event</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.02 Alertness Questionnaire</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_erb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.03 Empty Room (before)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_rs">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.04 Resting State</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_erf">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.05 ERF</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_cg">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.06 Complete Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_og">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.07 Observe Game</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_ar">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.08 NCPT Arithmetic Reasoning</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_dsc">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.09 NCPT Digit Symbol Coding</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_sb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.10 NCPT Scale Balance</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_gr">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.11 NCPT Grammatical Reasoning</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_ms">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.12 NCPT Memory Span</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_or">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.13 NCPT Object Recognition</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_rms">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.14 NCPT Reverse Memory Span</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_tma">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.15 NCPT Trail Making A</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_ncpt_tmb">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.16 NCPT Trail Making B</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_era">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.17 Empty Room (after)</field>
+        <field name="task_type">data</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_pay">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.18 Pay Subject</field>
+        <field name="task_type">payment</field>
+    </record>
+
+    <record model="naas.experiment.task" id="KER2020_1_bt5_notes">
+        <field name="experiment_id" ref="KER2020_1" />
+        <field name="group">7. Brain Training 5</field>
+        <field name="name">7.19 Notes</field>
+    </record>
+
+    
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_scrap_view_form_mrp_inherit_mrp_inherit_cancel" model="ir.ui.view">
+        <field name="name">stock.scrap.view.form2.inherit.mrp</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="mrp.stock_scrap_view_form_mrp_inherit_mrp"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="scrap_qty" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="product_uom_id" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="lot_id" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="production_id" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="location_id" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="scrap_location_id" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['done','cancel'])]}</attribute>
+            </field>
+            <field name="origin" position="attributes">
+                <attribute name="attrs">{'readonly':[('state', 'in', ['cancel'])]}</attribute>
+            </field>
+            <field name="state" position="before">
+                <button name="action_cancel" states="done" string="Cancel" type="object"
+                        class="btn btn-primary"/>
+            </field>
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,done,cancel</attribute>
+            </field>
+            <field name="move_id" position="after">
+                <field name="cancel_move_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

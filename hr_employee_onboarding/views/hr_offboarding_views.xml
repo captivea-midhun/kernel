@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hr_offboarding_root" name="Offboarding"
+              web_icon="hr_employee_offboarding,static/description/offboarding.png"
+              sequence="76"/>
+
+    <menuitem id="menu_hr_offboarding_main"
+              name="Employee Offboarding" parent="menu_hr_offboarding_root"
+              sequence="0"/>
+
+    <record id="view_employee_offboarding_filter" model="ir.ui.view">
+        <field name="name">hr.offboarding.search</field>
+        <field name="model">hr.offboarding</field>
+        <field name="arch" type="xml">
+            <search string="Employees Offboarding">
+                <field name="name" string="Employee"
+                       filter_domain="['|', ('email', 'ilike', self), ('name', 'ilike', self)]"/>
+                <separator/>
+                <filter name="state" string="Active"
+                        domain="[('state','=','active')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hr_offboarding_tree" model="ir.ui.view">
+        <field name="name">hr.offboarding.tree</field>
+        <field name="model">hr.offboarding</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="today_date"/>
+                <field name="employment_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_offboarding_form_view" model="ir.ui.view">
+        <field name="name">hr.offboarding.form</field>
+        <field name="model">hr.offboarding</field>
+        <field name="arch" type="xml">
+            <form string="Employee Offboarding Application">
+                <header>
+                    <field name="state" widget="statusbar"
+                           options="{'clickable': '1'}"
+                           statusbar_visible="active,complete"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Employee's Name" required="True"/>
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <field name="employment_date" required="True"/>
+                        </group>
+                        <group>
+                            <field name="today_date" required="True"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="general" string="General">
+                            <group string="Post Termination" name="post_termination">
+                                <field name="offboarding_general_post_termination_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_general_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Post Termination">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="hr" string="HR">
+                            <group string="In person"
+                                   name="in_person">
+                                <field name="offboarding_hr_person_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_hr_person_id" invisible="1"/>
+                                    </tree>
+                                    <form string="In person">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                            <group string="Post Termination" name="post_termination">
+                                <field name="offboarding_hr_post_termination_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_hr_post_termination_id"
+                                               invisible="1"/>
+                                    </tree>
+                                    <form string="Post Termination">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="finance_options"
+                              string="Finance &amp; Options">
+                            <group string="Paycheck"
+                                   name="paycheck">
+                                <field name="offboarding_finance_options_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_finance_option_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Paycheck">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                            <group name="post_termination" string="Post Termination">
+                                <field name="offboarding_finance_opt_post_termination_ids"
+                                       nolabel="1">
+                                    <tree editable="bottom"
+                                          create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="finance_opt_post_termination_id"
+                                               invisible="1"/>
+                                    </tree>
+                                    <form string="Post Termination">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="IT" string="IT">
+                            <separator/>
+                            <group string="Termination Process" name="termination_process">
+                                <field name="offboarding_it_termination_process_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_it_termination_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Termination Process">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Operations" name="operations">
+                            <separator/>
+                            <group string="Operations" name="operations">
+                                <field name="offboarding_operations_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_operation_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Operations">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Reception" name="reception">
+                            <separator/>
+                            <group string="Reception" name="reception">
+                                <field name="offboarding_reception_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_reception_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Reception">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+						<page string="Security" name="secure">
+                            <separator/>
+                            <group string="Security" name="secure">
+                                <field name="offboarding_secure_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="offboarding_secure_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Security">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_offboarding" model="ir.actions.act_window">
+        <field name="name">Employees Offboarding</field>
+        <field name="res_model">hr.offboarding</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_state':1}</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="view_employee_offboarding_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new employee Offboarding Application
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_hr_offboarding_main_user"
+              name="Employees Offboarding"
+              action="action_hr_offboarding"
+              parent="menu_hr_offboarding_main"
+              sequence="1"/>
+
+</odoo>

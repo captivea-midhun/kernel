@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_mrp_component_change_form_view_inherit" model="ir.ui.view">
+            <field name="name">Component change Form Inherit</field>
+            <field name="model">mrp.component.change</field>
+            <field name="inherit_id" ref="deltatech_mrp_edit_comp.view_mrp_component_change_form"/>
+            <field name="arch" type="xml">
+                <field name="product_uom_qty" position="after">
+                    <field name="slot"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

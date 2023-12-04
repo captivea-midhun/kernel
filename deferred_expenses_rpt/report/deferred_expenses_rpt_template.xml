@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="deferred_expenses_paper_format" model="report.paperformat">
+        <field name="name">Deferred Expenses Report</field>
+        <field name="orientation">Landscape</field>
+        <field name="header_spacing">35</field>
+    </record>
+
+    <report id="action_download_pdf_deferred_expenses"
+            string="Deferred Expenses Report"
+            model="deferred.expenses.report" report_type="qweb-pdf"
+            file="deferred_expenses_rpt.deferred_expenses"
+            name="deferred_expenses_rpt.deferred_expenses"
+            paperformat="deferred_expenses_rpt.deferred_expenses_paper_format"
+            print_report_name="'Deferred_Expenses_Report_%s' % (time.strftime('%Y-%m-%d %H:%M:%S'))"/>
+
+    <template id="deferred_expenses">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <h3 class="text-center mb32">
+                            Deferred Expenses Report
+                            <br/>
+                            <br/>
+                            <span t-esc="(str(o.date_from) + ' TO ' + str(o.date_to))"></span>
+                        </h3>
+                        <t t-set="datas" t-value="o.prepare_data(o.date_from,o.date_to)"/>
+                        <table class="table table-condensed" style="font-size: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Expense Account</th>
+                                    <th class="text-right">Amort. Period</th>
+                                    <th class="text-right">Original value</th>
+                                    <th class="text-right">Beg. Accum Amort</th>
+                                    <th class="text-right">Period Amort</th>
+                                    <th class="text-right">Ending Accum.Amort.</th>
+                                    <th class="text-right">Remaining Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="total_original_value" t-value="0.00"/>
+                                <t t-set="total_beg_accum_amort" t-value="0.00"/>
+                                <t t-set="total_period_amort" t-value="0.00"/>
+                                <t t-set="total_ending_accum_amort" t-value="0.00"/>
+                                <t t-set="total_remaining_balance" t-value="0.00"/>
+                                <tr t-foreach="datas" t-as="row_data">
+                                    <td>
+                                        <t t-esc="row_data['date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="row_data['name']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="row_data['expense_account']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="row_data['amort_period']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="row_data['original_value']"
+                                           t-options='{"widget": "monetary",
+                                           "display_currency": o.env.user.company_id.currency_id}'/>
+                                        <t t-set="total_original_value"
+                                           t-value="total_original_value + row_data['original_value']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="row_data['beg_accum_amort']"
+                                           t-options='{"widget": "monetary",
+                                           "display_currency": o.env.user.company_id.currency_id}'/>
+                                        <t t-set="total_beg_accum_amort"
+                                           t-value="total_beg_accum_amort + row_data['beg_accum_amort']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="row_data['period_amort']"
+                                           t-options='{"widget": "monetary",
+                                           "display_currency": o.env.user.company_id.currency_id}'/>
+                                        <t t-set="total_period_amort"
+                                           t-value="total_period_amort + row_data['period_amort']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="row_data['ending_accum_amort']"
+                                           t-options='{"widget": "monetary",
+                                           "display_currency": o.env.user.company_id.currency_id}'/>
+                                        <t t-set="total_ending_accum_amort"
+                                           t-value="total_ending_accum_amort + row_data['ending_accum_amort']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="row_data['remaining_balance']"
+                                           t-options='{"widget": "monetary",
+                                           "display_currency": o.env.user.company_id.currency_id}'/>
+                                        <t t-set="total_remaining_balance"
+                                           t-value="total_remaining_balance + row_data['remaining_balance']"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">
+                                        <b>Total</b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b>
+                                            <span t-esc="total_original_value"
+                                                  t-options='{"widget": "monetary",
+                                                  "display_currency": o.env.user.company_id.currency_id}'/>
+                                        </b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b>
+                                            <span t-esc="total_beg_accum_amort"
+                                                  t-options='{"widget": "monetary",
+                                                  "display_currency": o.env.user.company_id.currency_id}'/>
+                                        </b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b>
+                                            <span t-esc="total_period_amort"
+                                                  t-options='{"widget": "monetary", "display_currency": o.env.user.company_id.currency_id}'/>
+                                        </b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b>
+                                            <span t-esc="total_ending_accum_amort"
+                                                  t-options='{"widget": "monetary",
+                                                  "display_currency": o.env.user.company_id.currency_id}'/>
+                                        </b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b>
+                                            <span t-esc="total_remaining_balance"
+                                                  t-options='{"widget": "monetary",
+                                                  "display_currency": o.env.user.company_id.currency_id}'/>
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="page-break-before:always;"/>
+                        <div class="oe_structure"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

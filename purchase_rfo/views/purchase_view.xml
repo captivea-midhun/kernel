@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_stock_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.stock.form.inhrit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <field name="dest_address_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="attrs">{}</attribute>
+            </field>
+            <field name="partner_ref" position="after">
+                <xpath expr="//page[@name='purchase_delivery_invoice']/group/group/field[@name='picking_type_id']"
+                       position="move"/>
+                <xpath expr="//page[@name='purchase_delivery_invoice']/group/group/field[@name='dest_address_id']"
+                       position="move"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_form_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="bista_manufacturing_orders_count" invisible="1"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object"
+                        name="action_manufacturing_orders"
+                        class="oe_stat_button"
+                        icon="fa-list-alt"
+                        attrs="{'invisible': [('bista_manufacturing_orders_count', '=', 0)]}"
+                        groups="base.group_user">
+                    <div class="o_stat_info">
+                        <field name="bista_manufacturing_orders_count" widget="statinfo"
+                               string="MFG. Order"/>
+                        <span class="o_stat_text">MO</span>
+                    </div>
+                </button>
+            </xpath>
+
+            <field name="partner_id" position="after">
+                <field name="nda" invisible="1"/>
+                <field name="export_restriction"
+                       attrs="{'readonly': [('state', 'in', ('purchase','done'))]}"/>
+            </field>
+            <field name="partner_ref" position="attributes">
+                <attribute name="string">Quote Number</attribute>
+            </field>
+            <field name="currency_id" position="after">
+                <field name="shipping_address_id" required="1"
+                       context="{'default_type': 'delivery', 'default_parent_id': partner_id, 'from_shipping_address': True}"
+                       attrs="{'readonly': [('shipping_address_id', '!=', False)]}"
+                       force_save="1"/>
+                <field name="department_id" required="1"
+                       attrs="{'readonly': [('state', 'in', ('purchase','done'))]}"/>
+                <field name="manager_id" readonly="1" force_save="1"/>
+                <field name="approver_user_id" readonly="1"
+                       attrs="{'invisible': [('approver_user_id', '=', False)]}"/>
+                <field name="purpose_type" required="1"
+                       attrs="{'readonly': [('state', 'in', ('purchase','done'))]}"
+                       options="{'no_create': True,'no_edit':True}"/>
+                <field name="current_user" invisible="1"/>
+                <field name="rfo_request_reason" required="1"/>
+            </field>
+            <field name="date_approve" position="before">
+                <field name="escalation" groups="purchase.group_purchase_manager"
+                       attrs="{'invisible': [('state', 'in', ('draft', 'awaiting_approval'))]}"/>
+            </field>
+            <field name="date_approve" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="date_approve" position="after">
+                <field name="expected_date" string="Desired Date" required="1"
+                       attrs="{'readonly': [('state','not in',('draft', 'awaiting_approval'))]}"/>
+                <field name="date_planned" string="Expected Date"
+                       groups="purchase.group_purchase_manager"
+                       attrs="{'invisible': [('state', 'in', ('draft', 'awaiting_approval'))],
+                    'readonly': [('state', 'not in', ('draft','approved', 'sent'))]}"/>
+                <field name="days_disruption"
+                       attrs="{'readonly': [('state','not in',('draft', 'awaiting_approval'))]}"/>
+                <field name="vendor_days_receive"
+                       attrs="{'readonly': [('state','not in',('draft', 'awaiting_approval'))]}"/>
+                <field name="user_id" string="Requestor"/>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">['|', ('company_id', '=',False), ('company_id', '=',
+                    company_id),('is_company','=',True)]
+                </attribute>
+                <attribute name="context">{'default_is_company': True}</attribute>
+            </field>
+            <field name="currency_id" position="replace"/>
+            <field name="date_order" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="origin" position="after">
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"
+                       invisible="1"/>
+                <field name="interchanging_po_sequence" readonly="1" invisible="1"/>
+                <field name="purchase_payment_journal_id" invisible="1"/>
+                <field name="purchase_payment_method"
+                       attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="currency_id" groups="base.group_multi_currency" force_save="1"/>
+                <field name="unreceived_qty" attrs="{'invisible': [('picking_count', '=', 0)]}"/>
+                <field name="unpaid_amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"
+                       attrs="{'invisible': [('invoice_count', '=', 0)]}"/>
+                <field name="courier_id"
+                       attrs="{'invisible': [('state','not in', ('purchase','done'))]}"
+                       readonly="1"/>
+                <field name="tracking_number" readonly="1"
+                       attrs="{'invisible': [('state','not in', ('purchase','done'))]}"/>
+                <field name="po_payment_notes"/>
+                <field name="bista_subcontracted_ids" widget="many2many_tags" readonly="1"/>
+                <field name="bista_manufacturing_orders_count" invisible="1"/>
+                <field name="is_approve_rfo" invisible="1"/>
+            </field>
+            <xpath expr="//group[@name='planning']/div/field[@name='date_planned']"
+                   position="attributes">
+                <attribute name="attrs">{}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='planning']/div/field[@name='date_planned']"
+                   position="attributes">
+                <attribute name="widget">date</attribute>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']/group/group[@name='planning']/label"
+                   position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']/group/group[@name='planning']/div"
+                   position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']"
+                   position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <field name="notes" position="after">
+                <field name="po_notes" class="oe_inline" placeholder="Define PO Notes ..."
+                       groups="purchase.group_purchase_manager,purchase_rfo.group_rfo_approve"/>
+            </field>
+            <field name="notes" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_type']"
+                   position="replace"/>
+
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_id']"
+                   position="after">
+                <field name="product_type" optional="show"
+                       attrs="{'column_invisible': [('parent.state', 'not in', ('purchase', 'done'))]}"/>
+            </xpath>
+
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='taxes_id']"
+                   position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='name']"
+                   position="after">
+                <field name="product_sku" optional="show"/>
+                <field name="line_url" optional="show" widget="url"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='date_planned']"
+                   position="after">
+                <field name="account_id" optional="show" force_save="1"
+                       attrs="{'required': [('display_type', '=', False),('product_type', '=', 'product')],
+                       'readonly': [('product_type', '=', 'product')]}"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']" position="attributes">
+                <attribute name="context">{'default_account_analytic_id':analytic_account_id}
+                </attribute>
+            </xpath>
+            <xpath expr="//header/field[@name='state']" position="replace">
+                <field name="state" widget="statusbar"
+                       statusbar_visible="draft,awaiting_approval,approved,purchase"
+                       readonly="1"/>
+            </xpath>
+            <xpath expr="//header/button[@id='bid_confirm']" position="attributes">
+                <attribute name="invisible">"1"</attribute>
+            </xpath>
+            <xpath expr="//header/button[@id='draft_confirm']" position="attributes">
+                <attribute name="string">Create PO</attribute>
+                <attribute name="states">approved</attribute>
+                <attribute name="groups">purchase.group_purchase_manager</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_rfq_send']" position="attributes">
+                <attribute name="states">draft,awaiting_approval,approved,purchase</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='button_cancel']" position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='button_draft']" position="after">
+                <button name="button_cancel"
+                        states="awaiting_approval,approved"
+                        string="Cancel Request" type="object"
+                        class="text-danger"/>
+                <button name="button_cancel" states="purchase"
+                        string="Cancel Order" type="object"
+                        class="text-danger" confirm="Confirm you would like to cancel this order?"/>
+
+            </xpath>
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="string">Print RFO</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <div class="oe_title">
+                    <span class="o_form_label"
+                          attrs="{'invisible': [('state','not in',('draft','sent', 'awaiting_approval','approved'))]}">
+                        Request for Order
+                    </span>
+                    <span class="o_form_label"
+                          attrs="{'invisible': [('state','in',('draft','sent', 'awaiting_approval','approved', 'cancel'))]}">
+                        Purchase Order
+                    </span>
+                    <h1>
+                        <field name="rfo_name" readonly="1"
+                               attrs="{'invisible': [('state','not in',('draft','sent', 'awaiting_approval','approved'))]}"/>
+                        <field name="name" readonly="1"
+                               attrs="{'invisible': [('state','in',('draft','sent', 'awaiting_approval','approved'))]}"/>
+                    </h1>
+                </div>
+            </xpath>
+            <xpath expr="//header/button[@name='print_quotation']" position="after">
+                <button name="button_awaiting_approval"
+                        string="Submit for approval" type="object"
+                        states="draft,sent" class="oe_highlight bg-success"/>
+                <button name="button_approved" string="Approve"
+                        type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('state', '!=','awaiting_approval'), ('is_approve_rfo','=', False)]}"/>
+            </xpath>
+            <xpath expr="//header/button[last()]" position="after">
+                <button name="%(purchase_rfo.wizard_po_tracking_number_view_action)d"
+                        states="purchase" string="Add Tracking Number"
+                        type="action"
+                        groups="purchase.group_purchase_manager"/>
+            </xpath>
+            <xpath expr="//button[@name='button_done']"
+                   position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_rfq_send' and @states='purchase']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_invoice'][1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,account.group_account_user
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_invoice'][2]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager,account.group_account_user
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_picking'][1]" position="attributes">
+                <attribute name="groups">stock.group_stock_user,purchase.group_purchase_manager
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_picking' and hasclass('oe_stat_button')]"
+                   position="attributes">
+                <attribute name="groups">stock.group_stock_user,purchase.group_purchase_manager
+                </attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']"
+                   position="attributes">
+                <attribute name="context">{'partner_id':parent.partner_id,
+                    'quantity':product_qty,
+                    'uom':product_uom,
+                    'company_id': parent.company_id,
+                    'invisible_purchase_ok': 0,
+                    'invisible_sale_ok': 1,
+                    'default_sale_ok': False,
+                    'default_purchase_ok': True}
+                </attribute>
+            </xpath>
+            <xpath expr="//form//group//field[@name='product_id']" position="attributes">
+                <attribute name="context">{'partner_id': parent.partner_id,
+                    'invisible_purchase_ok': 0,
+                    'invisible_sale_ok': 1,
+                    'default_sale_ok': False,
+                    'default_purchase_ok': True}
+                </attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Inherited REQ List View -->
+    <record id="purchase_order_tree_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="rfo_name" readonly="1"/>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_id" position="after">
+                <field name="rfo_request_reason" required="1"/>
+            </field>
+            <field name="user_id" position="attributes">
+                <attribute name="string">Requestor</attribute>
+            </field>
+            <field name="user_id" position="after">
+                <field name="purchaser_id" optional="hide"/>
+            </field>
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_order" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="date_order" position="after">
+                <field name="date_planned" string="Expected Date"
+                       groups="purchase.group_purchase_manager"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Inherited Purchase Order search view -->
+    <record id="purchase_order_view_search_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.order.select</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="filter_domain">['|', '|', '|',('name',
+                    'ilike', self), ('partner_ref', 'ilike', self),
+                    ('partner_id', 'child_of', self), ('user_id',
+                    'ilike', self)]
+                </attribute>
+            </field>
+            <filter name="order_date" position="after">
+                <filter name="expected_date" string="Desired Date" date="expected_date"/>
+                <filter name="date_planned"
+                        string="Expected Date" date="date_planned"
+                        groups="purchase.group_purchase_manager"/>
+                <filter name="unpaid_amount" string="Unpaid"
+                        domain="[('invoice_ids','!=',False),('unpaid_amount', '>', 0)]"/>
+                <filter name="unreceived_qty" string="Partial Receipt"
+                        domain="[('unreceived_qty', '>', 0), ('picking_ids','!=',False)]"/>
+                <filter name="unpaid_unreceived" string="Unpaid Or Partial Receipt"
+                        domain="['|','&amp;', ('unreceived_qty', '>', 0),('picking_ids','!=',False), '&amp;', ('unpaid_amount', '>', 0),('invoice_ids','!=',False)]"/>
+            </filter>
+            <xpath expr="//group" position="inside">
+                <filter name="expected_date" string="Desired Date" domain="[]"
+                        context="{'group_by': 'expected_date'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_filter_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.order.filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <filter name="to_approve" position="after">
+                <filter name="approved" string="RFO Approved"
+                        domain="[('state', '=', 'approved')]"/>
+                <filter name="awaiting_approval" string="To Approve"
+                        domain="[('state', '=', 'awaiting_approval')]"/>
+            </filter>
+            <filter name="to_approve" position="replace"/>
+            <xpath expr="//search/field[@name='user_id']" position="attributes">
+                <attribute name="string">Requestor</attribute>
+            </xpath>
+            <filter name="representative" position="attributes">
+                <attribute name="string">Requestor</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <!-- Inherited Purchase Order List View -->
+    <record id="purchase_order_view_tree_inherit_kernel" model="ir.ui.view">
+        <field name="name">purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="string">PO#</attribute>
+            </field>
+            <field name="date_approve" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="partner_id" position="after">
+                <field name="rfo_request_reason" required="1" optional=""/>
+            </field>
+            <field name="user_id" position="attributes">
+                <attribute name="string">Requestor</attribute>
+            </field>
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_planned" position="replace">
+            </field>
+            <field name="user_id" position="after">
+                <field name="expected_date" optional="show"/>
+                <field name="purchaser_id" optional="hide"/>
+                <field name="date_planned" invisible="context.get('quotation_only', False)"
+                       optional="show" string="Expected Date" widget="date"/>
+                <field name="escalation" optional="show"/>
+                <field name="tracking_number" readonly="1"/>
+                <field name="unreceived_qty" readonly="1"/>
+                <field name="invoice_ids" invisible="1"/>
+            </field>
+            <field name="invoice_status" position="after">
+                <field name="unpaid_amount"/>
+            </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-muted">
+                    state=='cancel' or unreceived_qty == 0 and unpaid_amount == 0 and invoice_ids
+                </attribute>
+                <attribute name="decoration-danger">
+                    unreceived_qty > 0 and date_planned and date_planned &lt; current_date
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Action for purchase-->
+    <record id="purchase.product_normal_action_puchased" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="context">{"search_default_filter_to_purchase":1,
+            "purchase_product_template": 1, "invisible_purchase_ok": 0,
+            "invisible_sale_ok": 1,
+            'default_purchase_ok': True, 'default_sale_ok': False}
+        </field>
+    </record>
+
+    <record id="purchase.group_purchase_manager" model="res.groups">
+        <field name="name">Manager</field>
+    </record>
+
+    <!-- Changes Requests for Quotation to Requests for Order -->
+    <record model="ir.actions.act_window" id="purchase.purchase_rfq">
+        <field name="name">Requests for Order</field>
+        <field name="domain">[('state', 'not in', ('purchase', 'done'))]
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="purchase.purchase_form_action">
+        <field name="context">{'search_default_unpaid_unreceived':1}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="purchase.menu_purchase_rfq">
+        <field name="name">Requests for Order</field>
+    </record>
+
+    <record model="ir.actions.report" id="purchase.report_purchase_quotation">
+        <field name="name">Requests for Order</field>
+        <field name="print_report_name">'Request for Order - %s' % (object.name)
+        </field>
+    </record>
+
+    <record model="ir.actions.report" id="purchase.action_report_purchase_order">
+        <field name="binding_model_id" ref=""/>
+    </record>
+
+    <menuitem id="purchase.menu_procurement_management_supplier_name"
+              name="Vendors" parent="purchase.menu_purchase_root"
+              groups="purchase.group_purchase_manager,stock.group_stock_manager"
+              action="account.res_partner_action_supplier" sequence="6"/>
+
+    <record id="stock.group_stock_manager" model="res.groups">
+        <field name="implied_ids" eval="[(3, ref('account.group_account_invoice'))]"/>
+    </record>
+
+    <!-- Hide default products -> products menu -->
+    <record model="ir.ui.menu" id="purchase.menu_procurement_partner_contact_form">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- Inherited purchase -> products menu to add action -->
+    <menuitem id="purchase.menu_purchase_products" name="Products"
+              parent="purchase.menu_purchase_root" sequence="5"
+              action="purchase.product_normal_action_puchased"
+              groups="product_extension.group_product_template"/>
+
+    <!-- Ticket 4099 Simplified Purchase Navigation-->
+    <record model="ir.ui.menu" id="purchase.purchase_report">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="ir.ui.menu" id="purchase.menu_procurement_management">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- Ticket 4164: Update Purchase order billing status to `fully billed` -->
+    <record id="purchase_order_fully_billed_server_action" model="ir.actions.server">
+        <field name="name">Make Fully Billed</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_manager'))]"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+for rec in records:
+    rec.button_fully_billed()
+        </field>
+    </record>
+
+    <!-- Ticket Number: 5,326: Issue: PO Unreceived Qty: Correction -->
+    <record id="purchase_order_update_po_received_qty_action" model="ir.actions.server">
+        <field name="name">Update PO Received Qty.</field>
+        <field name="model_id" ref="purchase_rfo.model_purchase_order"/>
+        <field name="binding_model_id" ref="purchase_rfo.model_purchase_order"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+for rec in records:
+    rec.update_po_receive_qty()
+        </field>
+    </record>
+
+    <menuitem action="purchase.purchase_rfq"
+              id="purchase.menu_purchase_rfq"
+              parent="purchase.menu_purchase_root"
+              sequence="0"/>
+
+    <menuitem action="purchase.purchase_form_action"
+              id="purchase.menu_purchase_form_action"
+              parent="purchase.menu_purchase_root"
+              sequence="1"/>
+
+    <menuitem id="purchase.menu_report_purchase"
+              name="Purchase Report"
+              parent="purchase.menu_purchase_root"
+              sequence="99"
+              groups="purchase.group_purchase_manager"/>
+
+    <menuitem id="purchase_report_all"
+              name="Purchase Report"
+              action="purchase.action_purchase_order_report_all"
+              parent="purchase.menu_report_purchase"
+              sequence="99"
+              groups="purchase.group_purchase_manager"/>
+
+</odoo>

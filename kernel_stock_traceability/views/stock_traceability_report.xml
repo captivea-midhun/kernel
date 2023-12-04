@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_stock_body_print" inherit_id="stock.report_stock_body_print">
+        <xpath expr='//th[hasclass("o_report_line_header")][4]' position='after'>
+            <th class="o_report_line_header">Slot</th>
+        </xpath>
+    </template>
+    <template id="report_stock_inventory" inherit_id="stock.report_stock_inventory">
+        <xpath expr='//th[hasclass("o_report_line_header")][4]' position='after'>
+            <th class="o_report_line_header">Slot</th>
+        </xpath>
+    </template>
+    <template id="report_mrp_line" inherit_id="stock.report_mrp_line">
+        <xpath expr="//t[@t-else='']/t[@t-raw='c']" position="replace">
+            <t t-if="a.get('slot_name') and a.get('slot_name') == c">
+                <span t-att-class="'bs_stock_traceability_report_action' + (' bs_traceability_update' if a.get('lot_editable') else '')">
+                    <t t-raw="c"/>
+                </span>
+            </t>
+            <t t-else="">
+                <t t-raw="c"/>
+            </t>
+        </xpath>
+        <xpath expr='//a[hasclass("o_stock_report_lot_action")]' position='replace'>
+            <t t-if="a.get('lot_editable')">
+                <a class="o_stock_report_lot_action bs_traceability_update" href="#">
+                    <t t-raw="c"/>
+                </a>
+            </t>
+            <t t-else="">
+                <a class="o_stock_report_lot_action" href="#">
+                    <t t-raw="c"/>
+                </a>
+            </t>
+        </xpath>
+    </template>
+</odoo>

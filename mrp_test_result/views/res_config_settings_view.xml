@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_mrp_testresult" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.mrp.kernel</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mrp.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='mrp']" position="inside">
+                <h2>MRP Test Result</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-lg-6 col-12 o_setting_box" id="mrp_test_result">
+                        <div class="o_setting_right_pane">
+                            <label for="file_path"/>
+                            <div class="text-muted">
+                                Configure File path
+                            </div>
+                            <div class="text-muted">
+                                <field name="file_path" placeholder="/home/odoo/data/"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="error_file_read_path"/>
+                            <div class="text-muted">
+                                Configure File path where you want store failed files.
+                            </div>
+                            <div class="text-muted">
+                                <field name="error_file_read_path"
+                                       placeholder="/home/odoo/data/errors_files"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="success_file_read_path"/>
+                            <div class="text-muted">
+                                Configure File path where you want store successfully read files.
+                            </div>
+                            <div class="text-muted">
+                                <field name="success_file_read_path"
+                                       placeholder="/home/odoo/data/success_files"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

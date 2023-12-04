@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="po_custom_report_view" model="ir.ui.view">
+        <field name="name">purchase.order.custom.report</field>
+        <field name="model">purchase.order.custom.report</field>
+        <field name="arch" type="xml">
+            <form string="Custom Purchase Order">
+                <field name="state" invisible="1" force_save="1"/>
+                <group states="init">
+                    <field name="company_id" groups="base.group_multi_company" required="1"/>
+                </group>
+                <group col='4' states="init">
+                    <field name="start_date" required="1"/>
+                    <field name="end_date" required="1"/>
+                    <field name="hr_department_ids" widget="many2many_tags"
+                           options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="report_type"/>
+                </group>
+                <group states="init">
+                    <group>
+                        <field name="purpose"/>
+                        <field name="confirm_date"/>
+                        <field name="expected_date"/>
+                        <field name="alt_ven_days_to_receive"/>
+                    </group>
+                    <group>
+                        <field name="desired_date"/>
+                        <field name="days_to_maj_dis"/>
+                        <field name="track_no"/>
+                    </group>
+                </group>
+                <group states="done" colspan="4">
+                    <field name="name" invisible="1"/>
+                    <field name="file_download" filename="name" readonly="1"/>
+                </group>
+                <footer states="init">
+                    <button name="create_po_report" string="Print XLS Report" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+                <footer states="done">
+                    <button name="do_go_back" string="Back" type="object"
+                            class="oe_highlight"/>
+                    or
+
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="po_custom_report_view_action" model="ir.actions.act_window">
+        <field name="name">Purchase Custom Report</field>
+        <field name="res_model">purchase.order.custom.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="po_custom_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_custom_purchase_report"
+              name="Purchase Custom Report"
+              parent="purchase.menu_report_purchase"
+              action="po_custom_report_view_action"
+              sequence="11"/>
+
+</odoo>

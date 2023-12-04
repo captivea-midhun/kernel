@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.mrp</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="35"/>
+            <field name="inherit_id" ref="mrp.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='mrp_mps']/.." position='after'>
+                    <h2>Auto Replenish Planning</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-lg-6 col-12 o_setting_box" id="mrp_mps">
+                            <div class="o_setting_left_pane">
+                                <field name="is_auto_replenish"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="is_auto_replenish"/>
+                                <div class="text-muted">
+                                    Daily auto replenish from MPS
+                                </div>
+                                <div class="content-group mt16"
+                                     attrs="{'invisible': [('is_auto_replenish','=',False)]}">
+                                    <label string="Interval Number" for="interval_number"
+                                           class="o_light_label"/>
+                                    <field name="interval_number" class="o_light_label"/>
+                                    <br/>
+                                    <label string="Interval Type" for="interval_type"
+                                           class="o_light_label"/>
+                                    <field name="interval_type" widget="radio" class="o_light_label"/>
+                                    <br/>
+                                    <label string="Next Call" for="nextcall" class="o_light_label"/>
+                                    <field name="nextcall" class="o_light_label"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

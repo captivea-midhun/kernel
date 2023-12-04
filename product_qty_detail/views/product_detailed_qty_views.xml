@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product detailed qty wizard form view-->
+        <record id="product_detailed_qty_form" model="ir.ui.view">
+            <field name="name">product.detailed.qty.form</field>
+            <field name="model">product.detailed.qty</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" invisible="1"/>
+                                <field name="product_tmpl_id" invisible="1"/>
+                                <field name="product_id" invisible="1"/>
+                                <field name="on_hand_qty"/>
+                                <label style="width:300px" for="total_remaining_qty"
+                                       string="Purchased Not Received"/>
+                                <div class="o_row" name="po_total_remaining_qty">
+                                    <field name="total_remaining_qty"/>
+                                </div>
+                                <field name="forecast_qty"/>
+                            </group>
+                            <group>
+                                <field name="net_qty"/>
+                                <field name="total_reserve_qty"/>
+                            </group>
+                            <group>
+                                <field name="po_qty_ids" nolabel="1" colspan="2"
+                                       options="{'no_open': True}">
+                                    <tree options="{'no_open': True}" decoration-danger="True"
+                                          limit="5">
+                                        <field name="po_id" string="Purchase Order"
+                                               widget="list.many2one"/>
+                                        <field name="expected_date" widget="date"
+                                               decoration-danger="expected_date &lt;= current_date"/>
+                                        <field name="qty" string="Remaining Quantity" sum="Total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- Received Purchase Order -->
+                            <group>
+                                <field name="po_qty_rec_ids" nolabel="1" colspan="2"
+                                       options="{'no_open': True}">
+                                    <tree options="{'no_open': True}" decoration-success="True"
+                                          limit="5">
+                                        <field name="po_id" string="Purchase Order"
+                                               widget="list.many2one"/>
+                                        <field name="expected_date" widget="date"
+                                               string="Date Received"
+                                               decoration-danger="expected_date &lt;= current_date"/>
+                                        <field name="qty" string="Received Quantity" sum="Total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="mo_qty_ids" nolabel="1" colspan="2"
+                                       options="{'no_open': True}">
+                                    <tree options="{'no_open': True}" decoration-danger="True"
+                                          limit="5">
+                                        <field name="mo_id" string="Manufacturing Order"
+                                               widget="list.many2one"/>
+                                        <field name="qty" string="Reserved Quantity" sum="Total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- Received MTO -->
+                            <group>
+                                <field name="mo_qty_rec_ids" nolabel="1" colspan="2"
+                                       options="{'no_open': True}">
+                                    <tree options="{'no_open': True}" decoration-success="True"
+                                          limit="5">
+                                        <field name="mo_id" string="Manufacturing Order"
+                                               widget="list.many2one"/>
+                                        <field name="qty" string="Done Quantity" sum="Total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="picking_qty_ids" nolabel="1" colspan="2"
+                                       options="{'no_open': True}">
+                                    <tree options="{'no_open': True}" decoration-danger="True"
+                                          limit="5">
+                                        <field name="picking_id" string="Delivery Order"
+                                               widget="list.many2one"/>
+                                        <field name="qty_reserved" string="Reserved Quantity"
+                                               sum="Total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- Received Delivery Order -->
+                            <group>
+                                <field name="picking_qty_rec_ids" nolabel="1" colspan="2"
+                                       options="{'no_open': True}">
+                                    <tree options="{'no_open': True}" decoration-success="True"
+                                          limit="5">
+                                        <field name="picking_id" string="Delivery Order"
+                                               widget="list.many2one"/>
+                                        <field name="qty_reserved" string="Delivered Quantity"
+                                               sum="Total"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

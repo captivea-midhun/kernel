@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report string="Projected BoM Structure"
+                id="action_projected_bom_structure"
+                model="mrp.bom"
+                name="kernel_projected_bom_cost.projected_bom_structure"
+                file="kernel_projected_bom_cost.projected_bom_structure"
+                report_type="qweb-pdf"
+                print_report_name="'Projected Bom Structure - %s' % object.display_name"
+        />
+    </data>
+</odoo>

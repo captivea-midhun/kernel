@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Access group for deleting asset journal entries -->
+    <record id="group_asset_journal_entry_delete" model="res.groups">
+        <field name="name">Delete Asset Journal Entries</field>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>

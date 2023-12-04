@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Purchase purpose Type List View-->
+    <record id="purpose_type_list" model="ir.ui.view">
+        <field name="name">purpose.type.tree</field>
+        <field name="model">purpose.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Purchase Purpose Type Form View-->
+    <record id="purpose_type_form" model="ir.ui.view">
+        <field name="name">purpose.type.form</field>
+        <field name="model">purpose.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active" invisible="1"/>
+                    </group>
+                    <group/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Purchase Purpose Type Action Window -->
+    <record id="purpose_type_action_window" model="ir.actions.act_window">
+        <field name="name">Purpose</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purpose.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Purchase Purpose Type Menu Action -->
+    <menuitem id="purpose_type_action_menu"
+              name="Purpose"
+              parent="purchase.menu_purchase_config"
+              action="purpose_type_action_window"
+              groups="group_purpose_type_user,group_purpose_type_admin"
+              sequence="6"/>
+</odoo>

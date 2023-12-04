@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <record id="courier_fedex" model="purchase.delivery.courier">
+        <field name="name">Fedex</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="courier_ups" model="purchase.delivery.courier">
+        <field name="name">UPS</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="courier_dhl" model="purchase.delivery.courier">
+        <field name="name">DHL</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="courier_usps" model="purchase.delivery.courier">
+        <field name="name">USPS</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="courier_other" model="purchase.delivery.courier">
+        <field name="name">Other</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

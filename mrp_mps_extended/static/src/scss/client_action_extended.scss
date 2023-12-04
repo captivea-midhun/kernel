@@ -1,0 +1,12 @@
+.o_mrp_mps {
+    table {
+        overflow-x: auto;
+    }
+    table tr th:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background-color: #e9ecef;
+        /*width:450px !important*/
+    }
+}

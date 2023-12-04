@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="forecast_button_access" model="res.groups">
+            <field name="name">Forecast Button</field>
+        </record>
+    </data>
+</odoo>

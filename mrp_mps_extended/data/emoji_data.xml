@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="emoji_test_input_1" model="emoji.logo">
+            <field name="name">Cry</field>
+            <field name="logo">😭</field>
+        </record>
+        <record id="emoji_test_input_2" model="emoji.logo">
+            <field name="name">Sad</field>
+            <field name="logo">😞</field>
+        </record>
+        <record id="emoji_test_input_3" model="emoji.logo">
+            <field name="name">Pumpkin</field>
+            <field name="logo">🎃🎃</field>
+        </record>
+    </data>
+</odoo>

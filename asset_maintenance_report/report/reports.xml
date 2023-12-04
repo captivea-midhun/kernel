@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="maintenance_report_kernel_paper_format" model="report.paperformat">
+        <field name="name">Accounting Equipment Assets</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">25</field>
+        <field name="header_spacing">20</field>
+    </record>
+
+    <report id="maintenance_accounting_asset_both_report_kernel"
+            string="Equipment Assets (Assigned/Unassigned)" model="account.asset"
+            report_type="qweb-pdf"
+            name="asset_maintenance_report.accounting_asset_both_template"
+            file="asset_maintenance_report.accounting_asset_both_template"
+            paperformat="asset_maintenance_report.maintenance_report_kernel_paper_format"
+            menu="False"/>
+
+    <report id="maintenance_accounting_asset_report_kernel"
+            string="Equipment Assets" model="maintenance.equipment"
+            report_type="qweb-pdf"
+            name="asset_maintenance_report.accounting_asset_template"
+            file="asset_maintenance_report.accounting_asset_template"
+            paperformat="asset_maintenance_report.maintenance_report_kernel_paper_format"
+            menu="False"/>
+
+    <report id="maintenance_equip_report_kernel"
+            string="Equipment Assets" model="maintenance.equipment"
+            report_type="qweb-pdf"
+            name="asset_maintenance_report.maintenance_equip_template"
+            file="asset_maintenance_report.maintenance_equip_template"
+            paperformat="asset_maintenance_report.maintenance_report_kernel_paper_format"
+            menu="False"/>
+
+</odoo>

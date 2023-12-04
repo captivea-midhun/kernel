@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_projected_bom_cost" model="ir.actions.client">
+        <field name="name">Projected BoM Structure &amp; Cost</field>
+        <field name="tag">mrp_projected_bom_report</field>
+        <field name="context"
+               eval="{'model': 'report.kernel_projected_bom_cost.projected_bom_structure'}"/>
+    </record>
+
+    <record id="mrp_bom_form_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.bom.form.view.inherit</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div" position="inside">
+                <button name="%(action_report_projected_bom_cost)d" type="action"
+                        class="oe_stat_button" icon="fa-bars" string="Projected Bom Cost"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_bom_tree_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.bom.tree.view.inherit</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="subcontractor_ids" widget="many2many_tags"
+                       attrs="{'invisible': [('type', '!=', 'subcontract')],
+                       'required': [('type', '=', 'subcontract')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_tree_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.tree.view.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="subcontractor_ids" widget="many2many_tags" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

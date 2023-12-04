@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="accounting_asset_both_template_document">
+        <t t-call="web.internal_layout">
+            <div class="page">
+                <div class="text-center">
+                    <b>Accounting Assets</b>
+                </div>
+                <br/>
+                <table class="table table-condensed" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <th/>
+                            <th class="text-center">Accounting Records</th>
+                            <th/>
+                            <th style="border-right:1px solid #dee2e6;"/>
+                            <th/>
+                            <th class="text-center">Equipment Records</th>
+                            <th/>
+                            <th/>
+                            <th/>
+                        </tr>
+                        <tr>
+                            <th>Asset Model</th>
+                            <th>Purchase Date</th>
+                            <th style="width:10% !important;">Asset Description</th>
+                            <th class="text-right"
+                                style="border-right:1px solid #dee2e6;">Asset Cost
+                            </th>
+                            <th>Asset ID</th>
+                            <th>Equipment Name</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th class="text-right">Equip Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="asset_cost_total" t-value="0.00"/>
+                        <t t-set="equip_cost_total" t-value="0.00"/>
+                        <tr t-foreach="assigned_asset_ids" t-as="equipment_id">
+                            <td>
+                                <span t-esc="equipment_id.asset_id.model_id.name"/>
+                            </td>
+                            <td>
+                                <span t-esc="equipment_id.asset_id.acquisition_date"/>
+                            </td>
+                            <td>
+                                <span t-esc="equipment_id.asset_id.name"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="equipment_id.asset_id.original_value"
+                                      t-options='{"widget": "monetary",
+                                      "display_currency": equipment_id.asset_id.currency_id}'/>
+                            </td>
+                            <td>
+                                <span t-esc="equipment_id.asset_tag_id"/>
+                            </td>
+                            <td>
+                                <span t-esc="equipment_id.name"/>
+                            </td>
+                            <td>
+                                <span t-esc="equipment_id.equipment_brand"/>
+                            </td>
+                            <td>
+                                <span t-esc="equipment_id.model"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="equipment_id.cost"
+                                      t-options='{"widget": "monetary",
+                                      "display_currency": equipment_id.asset_id.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr t-foreach="unassigned_asset_ids"
+                            t-as="asset_id">
+                            <td>
+                                <span t-esc="asset_id.model_id.name"/>
+                            </td>
+                            <td>
+                                <span t-esc="asset_id.acquisition_date"/>
+                            </td>
+                            <td>
+                                <span t-esc="asset_id.name"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="asset_id.original_value"
+                                      t-options='{"widget": "monetary",
+                                      "display_currency": asset_id.currency_id}'/>
+                            </td>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="accounting_asset_both_template">
+        <t t-call="web.html_container">
+            <t t-call="asset_maintenance_report.accounting_asset_both_template_document"/>
+        </t>
+    </template>
+</odoo>

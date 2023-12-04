@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hr_onboarding_root" name="Onboarding"
+              web_icon="hr_employee_onboarding,static/description/onboarding.png"
+              sequence="76"/>
+
+    <menuitem id="menu_hr_onboarding_main"
+              name="Employee Onboarding" parent="menu_hr_onboarding_root"
+              sequence="0"/>
+
+    <record id="view_employee_onboarding_filter"
+            model="ir.ui.view">
+        <field name="name">hr.onboarding.search</field>
+        <field name="model">hr.onboarding</field>
+        <field name="arch" type="xml">
+            <search string="Employees Onboarding">
+                <field name="name" string="Employee"
+                       filter_domain="['|', ('email', 'ilike', self), ('name', 'ilike', self)]"/>
+                <separator/>
+                <filter name="state" string="Active" domain="[('state','=','active')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_onboarding_start_date" string="Date" domain="[]"
+                            context="{'group_by': 'start_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hr_onboarding_tree" model="ir.ui.view">
+        <field name="name">hr.onboarding.tree</field>
+        <field name="model">hr.onboarding</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_onboarding_form_view" model="ir.ui.view">
+        <field name="name">hr.onboarding.form</field>
+        <field name="model">hr.onboarding</field>
+        <field name="arch" type="xml">
+            <form string="Employee Onboarding Application">
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                           statusbar_visible="active,complete"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Employee's Name" required="True"/>
+                        </h1>
+                        <h2>
+                            <field name="title" placeholder="Title"/>
+                        </h2>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <field name="start_date" required="True"/>
+                            <field name="mobile" widget="phone" required="True"/>
+                            <field name="department_id" required="True"/>
+                        </group>
+                        <group>
+                            <field name="location" required="True"/>
+                            <field name="email" widget="email" required="True"/>
+                            <field name="hiring_manager" required="True"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="pre_post_hire" string="General Pre &amp; Post Hire">
+                            <group string="Pre Hire" name="pre_hire">
+                                <field name="pre_hire_onboarding_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="hr_pre_onboarding_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Pre Hire">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                            <group string="Post Hire" name="post_hire">
+                                <field name="post_hire_onboarding_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="hr_post_onboarding_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Post Hire">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="hr" string="HR">
+                            <group string="Offer" name="offer">
+                                <field name="hr_offer_onboarding_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="hr_offer_onboarding_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Offer">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                            <group string="Post Hire"
+                                   name="post_hire">
+                                <field name="hr_offer_post_onboarding_ids" nolabel="1">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="sequence" widget="handle" invisible="1"/>
+                                        <field name="name" string="Task" readonly="1"
+                                               force_save="1" width="40%%"/>
+                                        <field name="task_completion_date" width="20%%"/>
+                                        <field name="initials" width="20%%"/>
+                                        <field name="note" width="20%%"/>
+                                        <field name="hr_offer_post_onboarding_id" invisible="1"/>
+                                    </tree>
+                                    <form string="Post Hire">
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="initials"/>
+                                            </group>
+                                            <group>
+                                                <field name="task_completion_date"/>
+                                                <field name="note"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="options" string="Options">
+                            <separator/>
+                            <field name="hr_options_onboarding_ids" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="sequence" widget="handle" invisible="1"/>
+                                    <field name="name" string="Task" readonly="1"
+                                           force_save="1" width="40%%"/>
+                                    <field name="task_completion_date" width="20%%"/>
+                                    <field name="initials" width="20%%"/>
+                                    <field name="note" width="20%%"/>
+                                    <field name="hr_options_onboarding_id" invisible="1"/>
+                                </tree>
+                                <form string="Options">
+                                    <group>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="initials"/>
+                                        </group>
+                                        <group>
+                                            <field name="task_completion_date"/>
+                                            <field name="note"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name="operations" string="Operations">
+                            <separator/>
+                            <field name="hr_operations_onboarding_ids" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="sequence" widget="handle" invisible="1"/>
+                                    <field name="name" string="Task" readonly="1"
+                                           force_save="1" width="40%%"/>
+                                    <field name="task_completion_date" width="20%%"/>
+                                    <field name="initials" width="20%%"/>
+                                    <field name="note" width="20%%"/>
+                                    <field name="hr_operations_onboarding_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="IT" string="IT">
+                            <!-- Order Peferred Task -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="preferred_laptop_task"
+                                               string="Order Preferred Laptop"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="preferred_laptop_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="preferred_laptop_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="preferred_laptop_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="preferred_laptop_task_description"
+                                               string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="preferred_laptop_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="preferred_laptop_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="preferred_laptop_note"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Jumpcloud Task -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="jumpcloud_task"
+                                               string="Jumpcloud User Creation"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jumpcloud_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="jumpcloud_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jumpcloud_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="jumpcloud_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jumpcloud_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="jumpcloud_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jumpcloud_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Open Laptop Task -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="open_laptop_task"
+                                               string="Open their laptop"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="open_laptop_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="open_laptop_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="open_laptop_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="open_laptop_task_description"
+                                               string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="open_laptop_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="open_laptop_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="open_laptop_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- GSuite -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="gsuite_task" string="GSuite"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="gsuite_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="gsuite_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="gsuite_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="gsuite_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="gsuite_task_description" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="gusite_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="gsuite_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slack -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="slack_task" string="Slack"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="slack_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="slack_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="slack_completion_date" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="slack_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="slack_task_description" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="slack_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="slack_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Zoom -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="zoom_task" string="Zoom"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="zoom_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="zoom_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="zoom_completion_date" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="zoom_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="zoom_task_description" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="zoom_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="zoom_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 1Password -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="one_password_task" string="1Password"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="one_password_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="one_password_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="one_password_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="one_password_task_description"
+                                               string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="one_password_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="one_password_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="one_password_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Grubhub -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="grubhub_task" string="Grubhub"
+                                               style="font-size: 15px;" invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="grubhub_task" nolabel="1" readonly="1"
+                                                       force_save="1" invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="grubhub_completion_date"
+                                               string="Date of Completion" invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="grubhub_completion_date" nolabel="1"
+                                                       invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="grubhub_task_description" string="Initials"
+                                               invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="grubhub_task_description"
+                                                       nolabel="1" invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="grubhub_note" string="Notes" invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="grubhub_note" nolabel="1"
+                                                       invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Procurify -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="procurify_task" string="Procurify"
+                                               style="font-size: 15px;" invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="procurify_task" nolabel="1"
+                                                       readonly="1" force_save="1" invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="procurify_completion_date"
+                                               string="Date of Completion" invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="procurify_completion_date"
+                                                       nolabel="1" invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="procurify_task_description" string="Initials"
+                                               invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="procurify_task_description"
+                                                       nolabel="1" invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="procurify_note" string="Notes" invisible="1"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="procurify_note" nolabel="1"
+                                                       invisible="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Software -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="software_task" string="Software"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="software_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="software_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="software_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="software_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="software_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="software_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="software_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+							<!-- JIRA -->
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="jira_task" string="JIRA"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jira_task" nolabel="1"
+                                                       readonly="1" force_save="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="jira_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jira_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="jira_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jira_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="jira_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="jira_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="contractor" string="Contractor">
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="agency_name" string="Agency Name"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_name" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="agency_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_completion_date" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="agency_task_description" string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_task_description" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="agency_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="agency_contact" string="Agency Contact"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_contact" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label
+                                                for="agency_contact_completion_date"
+                                                string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_contact_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="agency_contact_task_description"
+                                               string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_contact_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="agency_contact_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="agency_contact_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="signed_contact" string="Signed Contract"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="signed_contact" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="signed_contact_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="signed_contact_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="signed_contact_task_description"
+                                               string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="signed_contact_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="signed_contact_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="signed_contact_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="o_setting_right_pane">
+                                        <label for="informed_agency_start"
+                                               string="Informed Agency of Start"
+                                               style="font-size: 15px;"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="informed_agency_start" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="informed_agency_completion_date"
+                                               string="Date of Completion"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="informed_agency_completion_date"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="informed_agency_task_description"
+                                               string="Initials"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="informed_agency_task_description"
+                                                       nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <div class="o_setting_left_pane">
+                                        <label for="informed_agency_note" string="Notes"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <field name="informed_agency_note" nolabel="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </page>
+                        <page name="reception" string="Reception">
+                            <separator/>
+                            <field name="hr_reception_onboarding_ids" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="sequence" widget="handle" invisible="1"/>
+                                    <field name="name" string="Task" readonly="1"
+                                           force_save="1" width="40%%"/>
+                                    <field name="task_completion_date" width="20%%"/>
+                                    <field name="initials" width="20%%"/>
+                                    <field name="note" width="20%%"/>
+                                    <field name="hr_reception_onboarding_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+						<page name="secure" string="Security">
+                            <separator/>
+                            <field name="hr_secure_onboarding_ids" nolabel="1">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="sequence" widget="handle" invisible="1"/>
+                                    <field name="name" string="Task" readonly="1"
+                                           force_save="1" width="40%%"/>
+                                    <field name="task_completion_date" width="20%%"/>
+                                    <field name="initials" width="20%%"/>
+                                    <field name="note" width="20%%"/>
+                                    <field name="hr_secure_onboarding_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_onboarding" model="ir.actions.act_window">
+        <field name="name">Employees Onboarding</field>
+        <field name="res_model">hr.onboarding</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_state':1}</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="view_employee_onboarding_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new employee Onboarding Application
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_hr_onboarding_main_user"
+              name="Employees Onboarding" action="action_hr_onboarding"
+              parent="menu_hr_onboarding_main" sequence="1"/>
+
+</odoo>

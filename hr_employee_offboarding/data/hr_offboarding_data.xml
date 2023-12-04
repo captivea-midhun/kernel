@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <!--General Post Termination Data -->
+    <record model="offboarding.general.post.termination" id="deactivate_litmos">
+        <field name="name">Deactivate Litmos</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="offboarding.general.post.termination" id="remove_company_directory">
+        <field name="name">Remove from Who's Who, Company Directory, and Team Org pages on Confluence</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record model="offboarding.general.post.termination" id="remove_bday_anniversary">
+        <field name="name">Remove Birthday and Anniversary from Kernel Birthday and Anniversary calendar</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!-- Offboarding HR Person Data -->
+    <record model="offboarding.hr.person" id="personal_change_status">
+        <field name="name">Personal Change of Status (CA)</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.hr.person" id="ca_edd_pamphlet">
+        <field name="name">CA EDD or MA UI Pamphlet</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="offboarding.hr.person" id="collect_laptop">
+        <field name="name">Collect laptop</field>
+        <field name="sequence">3</field>
+    </record>
+    <record model="offboarding.hr.person" id="collect_bedge">
+        <field name="name">Collect Badge</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="offboarding.hr.person" id="collect_cc">
+        <field name="name">Collect CC (if applicable)</field>
+        <field name="sequence">5</field>
+    </record>
+    <record model="offboarding.hr.person" id="collect_parking_pass">
+        <field name="name">Collect Parking Pass</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <!-- Offboarding HR Post termination Data -->
+    <record model="offboarding.hr.post.termination" id="cancel_uhc_insurance">
+        <field name="name">Cancel UHC insurance (last day of the month following termination)</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.hr.post.termination" id="cancel_hartford">
+        <field name="name">Cancel Hartford benefits (last day of work)</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="offboarding.hr.post.termination" id="terminate_betterment">
+        <field name="name">Terminate in Betterment</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record model="offboarding.hr.post.termination" id="move_emp_folder_terminate">
+        <field name="name">Move employee folders to Terminate</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="offboarding.hr.post.termination" id="cobra_asure">
+        <field name="name">COBRA- Asure</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <!-- Finance & Options Data -->
+    <record model="offboarding.finance.options" id="process_final_paycheck">
+        <field name="name">Process final paycheck</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.finance.options" id="email_paystub">
+        <field name="name">Email HR paystub</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Finance & Options Post Termination Data -->
+    <record model="offboarding.finance.options.post.termination" id="work_terminate">
+        <field name="name">Terminate in Paylocity</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.finance.options.post.termination" id="cancel_grant_carta">
+        <field name="name">Cancel Option Grant in Carta</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="offboarding.finance.options.post.termination" id="termination_headcount_doc">
+        <field name="name">Add termination date to Headcount document</field>
+        <field name="sequence">3</field>
+    </record>
+    <record model="offboarding.finance.options.post.termination" id="cancel_credit_card">
+        <field name="name">Cancel credit card</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="offboarding.finance.options.post.termination" id="send_option_termination_letter">
+        <field name="name">Send option termination letter</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <!-- Offboarding IT Termination Process data -->
+    <record model="offboarding.it.termination.process" id="suspend_google_acc">
+        <field name="name">Suspend Google account</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.it.termination.process" id="deactivate_slack_acc">
+        <field name="name">Deactivate Slack account</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="offboarding.it.termination.process" id="suspenf_1pass_acc">
+        <field name="name">Suspend 1password</field>
+        <field name="sequence">3</field>
+    </record>
+    <record model="offboarding.it.termination.process" id="deactivate_zoom_acc">
+        <field name="name">Deactivate Zoom</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="offboarding.it.termination.process" id="delete_jumplcloud_acc">
+        <field name="name">Delete Jumpcloud account</field>
+        <field name="sequence">5</field>
+    </record>
+    <record model="offboarding.it.termination.process" id="delete_user">
+        <field name="name">Delete local laptop user, add local admin user if needed, install JC agent if needed</field>
+        <field name="sequence">6</field>
+    </record>
+    <record model="offboarding.it.termination.process" id="archive_odoo_account">
+        <field name="name">Archive Odoo Account</field>
+        <field name="sequence">7</field>
+    </record>
+
+    <!-- Offboarding Operations data -->
+    <record model="offboarding.operations" id="operations_collecesfest_bose_headphones">
+        <field name="name">Collect and disinfect Bose headphones</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.operations" id="operations_clean_off_desk">
+        <field name="name">Clean off desk</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Offboarding Reception data -->
+    <record model="offboarding.reception" id="delete_from_parking_form">
+        <field name="name">Delete from Parking Form</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="offboarding.reception" id="reception_birthday">
+        <field name="name">Update Kernel Birthdays and Anniversaries Form</field>
+        <field name="sequence">2</field>
+    </record>
+	<!-- Offboarding Security data -->
+    <record model="offboarding.secure" id="secure_deactivate_badge">
+        <field name="name">Deactivate Badge</field>
+        <field name="sequence">1</field>
+    </record>
+	<record model="offboarding.secure" id="secure_update_security_binder">
+        <field name="name">Remove from Employee Directory Folder</field>
+        <field name="sequence">2</field>
+    </record>
+
+</odoo>

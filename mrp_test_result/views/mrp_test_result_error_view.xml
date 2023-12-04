@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_mrp_test_error_tree" model="ir.ui.view">
+        <field name="name">mrp.test.result.error.tree.view</field>
+        <field name="model">mrp.test.result.error</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false">
+                <field name="name" required="1"/>
+                <field name="date_error"/>
+                <field name="error_msg"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mrp_test_error_form" model="ir.ui.view">
+        <field name="name">mrp.test.result.error.form.view</field>
+        <field name="model">mrp.test.result.error</field>
+        <field name="arch" type="xml">
+            <form string="MRP Test Error Logs" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                        <group>
+                            <field name="date_error"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="error_msg"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mrp_test_error" model="ir.actions.act_window">
+        <field name="name">MRP Test Result Error Logs</field>
+        <field name="res_model">mrp.test.result.error</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_mrp_test_error"
+              name="MRP Test Result Error Logs" action="action_mrp_test_error"
+              parent="mrp.menu_mrp_manufacturing" sequence="100"
+              groups="mrp_test_result.group_mrp_test_result_module"/>
+</odoo>

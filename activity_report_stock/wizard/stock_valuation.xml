@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_valuation_ondate_report" model="ir.ui.view">
+        <field name="name">stock.valuation.ondate.report</field>
+        <field name="model">stock.valuation.ondate.report</field>
+        <field name="arch" type="xml">
+            <form string="Valuation Report">
+                <group>
+                    <group string="Warehouses">
+                        <field name="warehouse_ids" widget="many2many_tags" string="Warehouses"
+                               options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"/>
+                    </group>
+                    <group string="Location">
+                        <field name="location_id" string="Select Location"
+                               options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"
+                               widget="many2many_tags"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Valuation">
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <group string="Select Categories">
+                        <field name="filter_product_categ_ids" string="Product Category"
+                               options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"
+                               domain="[('type', '=', 'product')]"
+                               widget="many2many_tags"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Company" invisible="1">
+                        <field name="company_id" string="Company" options="{'no_open': True, 'no_create': True,
+                        'no_create_edit': True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_xls_report" string="_XLS" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_inventoryvaluation_report">
+        <field name="name">Stock Valuation</field>
+        <field name="res_model">stock.valuation.ondate.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="activity_report_stock.view_stock_valuation_ondate_report"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_inventoryvaluation_report"
+              name="Stock Movement"
+              parent="stock.menu_warehouse_report"
+              action="action_inventoryvaluation_report"
+              sequence="1"/>
+</odoo>
